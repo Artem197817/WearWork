@@ -1,0 +1,55 @@
+.header {
+    font-size: 80px;
+    text-align: center;
+    height: 200px;
+    background-color: rgb(69, 102, 247);
+    font-weight: bolder;
+    color: aliceblue;
+
+}
+
+.result {
+
+    height: 100px;
+    text-align: center;
+    font-size: 24px;
+    background-color: rgb(148, 156, 111);
+    color: rgb(243, 183, 71);
+
+
+}
+
+.button_form {
+    width: 250px;
+    height: 100px;
+    margin: 20px;
+
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-around;
+}
+
+p,
+a {
+    margin: 6px;
+    color: aliceblue;
+}
+
+.button {
+    background-color: rgb(55, 65, 199);
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    justify-content: center;
+    padding-block: calc(0.375em - 1px);
+    padding-inline: 0.75em;
+    width: 150px;
+    height: 50px;
+    color: bisque;
+
+}

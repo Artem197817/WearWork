@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="apiGateAway" />
+        <module name="workwearclient" />
+        <module name="workshoes" />
+        <module name="workwear" />
+        <module name="employee" />
+        <module name="eurekaServer" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="apiGateAway" target="17" />
+      <module name="employee" target="17" />
+      <module name="eurekaServer" target="17" />
+      <module name="WearWork" target="17" />
+      <module name="workshoes" target="17" />
+      <module name="workwear" target="17" />
+      <module name="workwearclient" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="apiGateAway" options="-parameters" />
+      <module name="employee" options="-parameters" />
+      <module name="eurekaServer" options="-parameters" />
+      <module name="workshoes" options="-parameters" />
+      <module name="workwear" options="-parameters" />
+      <module name="workwearclient" options="-parameters" />
+    </option>
+  </component>
+</project>

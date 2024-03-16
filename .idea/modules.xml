@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/WearWork.iml" filepath="$PROJECT_DIR$/.idea/WearWork.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apiGateAway/apiGateAway.iml" filepath="$PROJECT_DIR$/apiGateAway/apiGateAway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/employee/employee.iml" filepath="$PROJECT_DIR$/employee/employee.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eurekaServer/eurekaServer.iml" filepath="$PROJECT_DIR$/eurekaServer/eurekaServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/workshoes/workshoes.iml" filepath="$PROJECT_DIR$/workshoes/workshoes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/workwear/workwear.iml" filepath="$PROJECT_DIR$/workwear/workwear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/workwearclient/workwearclient.iml" filepath="$PROJECT_DIR$/workwearclient/workwearclient.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: work_wear_client
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics,prometheus,health
+  endpoint:
+    health:
+      show-details: always

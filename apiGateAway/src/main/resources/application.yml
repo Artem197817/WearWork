@@ -1,0 +1,34 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: api-gate
+routes:
+  - id: workWear
+    uri: http://localhost:8082/
+    predicates:
+      - Path=/work_wear/**
+  - id: workWearIssued
+    uri: http://localhost:8082/
+    predicates:
+      - Path=/work_wear_issued/**
+  - id: workWearTotal
+    uri: http://localhost:8082/
+    predicates:
+      - Path=/work_wear_total/**
+  - id: employee
+    uri: http://localhost:8081/
+    predicates:
+      - Path=/employee/**
+  - id: wokShoes
+    uri: http://localhost:8083/
+    predicates:
+      - Path=/work_shoes/**
+  - id: wokShoesIssued
+    uri: http://localhost:8083/
+    predicates:
+      - Path=/work_shoes_issued/**
+  - id: wokShoesTotal
+    uri: http://localhost:8083/
+    predicates:
+      - Path=/work_shoes_total/**
