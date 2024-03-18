@@ -2,10 +2,12 @@ package workwear.workshoes.controller;
 
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
+import workwear.workshoes.model.WorkShoes;
 import workwear.workshoes.model.WorkShoesIssued;
 import workwear.workshoes.service.WorkShoesIssuedService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/work_shoes_issued")
@@ -48,5 +50,9 @@ public class WorkShoesIssuedController {
     @GetMapping("work_shoes_to_be_replaced")
     public List<WorkShoesIssued> findWorkShoesToBeReplaced() {
         return workShoesIssuedService.findWorkShoesToBeReplaced();
+    }
+    @GetMapping("/work_shoes_issued_employee/{id}")
+    public Map<WorkShoesIssued,WorkShoes> findWorkShoesIssuedEmployee (@PathVariable Long id){
+        return workShoesIssuedService.findWorkShoesIssuedEmployee(id);
     }
 }

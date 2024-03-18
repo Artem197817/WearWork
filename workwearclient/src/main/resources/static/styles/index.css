@@ -54,14 +54,27 @@ a {
 
 }
 
-.quan {
-    width: 50px;
-    text-align: center;
-    font-size: 24px;
-    color: #855ef0;
+.input {
+    display:block;
+    margin-left: 50px;
+    height: 80px;
+    width: 350px;
+    color: #16033b;
+    background-color: rgb(175, 213, 245);
+    font-size: 20px;
+    align-items: center;
 }
-
-.basket {
-    color: #855ef0;
-    text-transform: uppercase;
+input,select {
+    width: 250px;
+    height: 50 px;
+    font-size: 20px;
+    color: #1c0447;
+    margin: 10px;
+    margin-left: 50px;
+}
+label {
+    margin-left: 60px;
+    margin-bottom: 5px;
+    display: block;
+    font-size: 20px;
 }

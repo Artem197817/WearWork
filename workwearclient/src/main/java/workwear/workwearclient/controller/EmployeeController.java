@@ -10,6 +10,7 @@ import workwear.workwearclient.service.EmployeeService;
 import workwear.workwearclient.view.input.InputValue;
 import workwear.workwearclient.view.output.Output;
 
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -24,15 +25,25 @@ public class EmployeeController {
 
 
     public List<Employee> findAllEmployee() {
-        return employeeApiClient.findAllEmployee();
+        return employeeApiClient.findAllEmployee().stream()
+                .sorted(Comparator.comparing(Employee::getLastName))
+                .toList();
     }
 
     public void saveNewEmployee() {
         employeeApiClient.saveEmployee(employeeService.createNewEmployee());
     }
 
+    public void saveEmployee(Employee employee) {
+        employeeApiClient.saveEmployee(employee);
+    }
+
     public void deleteEmployee() {
         employeeApiClient.deleteEmployee(inputValue.inputLong("id"));
+    }
+
+    public void deleteEmployeeById (Long id){
+        employeeApiClient.deleteEmployee(id);
     }
 
     public Employee findById() {

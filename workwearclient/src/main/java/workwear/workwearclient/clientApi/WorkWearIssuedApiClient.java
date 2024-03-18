@@ -2,9 +2,11 @@ package workwear.workwearclient.clientApi;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+import workwear.workwearclient.model.WorkWear;
 import workwear.workwearclient.model.WorkWearIssued;
 
 import java.util.List;
+import java.util.Map;
 
 @FeignClient(name = "workWearIssued", url = "http://localhost:8089/work_wear_issued")
 public interface WorkWearIssuedApiClient {
@@ -30,4 +32,6 @@ public interface WorkWearIssuedApiClient {
     @GetMapping("/work_wear_issued_to_be_replace")
     List<WorkWearIssued> findWorkWearIssuedToBeReplaced();
 
+    @GetMapping("/work_wear_issued_employee_id/{id}")
+    Map<WorkWearIssued,WorkWear> findWorkWearIssuedEmployee(@PathVariable Long id);
 }

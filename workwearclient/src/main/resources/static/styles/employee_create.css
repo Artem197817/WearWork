@@ -8,35 +8,12 @@
 
 }
 
-.result {
-
-    height: 100px;
-    text-align: center;
-    font-size: 24px;
-    background-color: rgb(148, 156, 111);
-    color: rgb(243, 183, 71);
-
-
-}
-
-.button_form {
-    width: 250px;
-    height: 100px;
-    margin: 20px;
-
-}
-
 .content {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: space-around;
-}
-
-p,
-a {
-    margin: 6px;
-    color: aliceblue;
+    width: 350px;
 }
 
 .button {
@@ -48,8 +25,38 @@ a {
     justify-content: center;
     padding-block: calc(0.375em - 1px);
     padding-inline: 0.75em;
-    width: 150px;
+    width: 200px;
     height: 50px;
     color: bisque;
+    margin: 25px;
 
+}
+.input {
+    display:block;
+    margin-left: 50px;
+    height: 80px;
+    width: 350px;
+    color: #16033b;
+    background-color: rgb(175, 213, 245);
+    font-size: 20px;
+    align-items: center;
+}
+input,select {
+    width: 250px;
+    height: 50 px;
+    font-size: 20px;
+    color: #1c0447;
+    margin: 10px;
+    margin-left: 50px;
+}
+label {
+    margin-left: 60px;
+    margin-bottom: 5px;
+    display: block;
+    font-size: 20px;
+}
+p,
+a {
+    margin: 6px;
+    color: aliceblue;
 }

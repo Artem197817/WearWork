@@ -3,6 +3,9 @@ package workwear.workwearclient.model.modelEnum;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 public enum Company {
     AO_KATOD("АО \"Катод\""),
@@ -32,5 +35,17 @@ public enum Company {
             valuesShoes[i++] = w.getValue();
         }
         return valuesShoes;
+    }
+
+    public static List<String> getValuesString(){
+        List<String> stringList = new ArrayList<>();
+        for (Company w : values()) {
+            stringList.add(w.getValue());
+        }
+        return stringList;
+    }
+
+    public static List<Company> getValues(){
+        return List.of(values());
     }
 }

@@ -1,8 +1,10 @@
 package workwear.workwear.service;
 
+import workwear.workwear.model.WorkWear;
 import workwear.workwear.model.WorkWearIssued;
 
 import java.util.List;
+import java.util.Map;
 
 public interface WorkWearIssuedService {
 
@@ -19,4 +21,6 @@ public interface WorkWearIssuedService {
     List<WorkWearIssued> findWorkWearIssuedByEmployeeId(Long id);
 
     List<WorkWearIssued> findWorkWearIssuedToBeReplaced();
+
+    Map<WorkWearIssued,WorkWear> findWorkWearIssuedEmployee(Long id);
 }

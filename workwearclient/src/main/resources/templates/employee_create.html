@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/styles/employee_create.css}" rel="stylesheet" />
+    <title>Work Wear</title>
+</head>
+
+<body>
+    <div class="header">
+        <p>Сотрудники ввод</p>
+        <p><span th:text="${message}"></span></p>
+    </div>
+    <div class="content">
+        <form class="form" action="#" th:action="@{/employee/create}" th:object="${employee}" method="post">
+            <div class="input">
+                <label for="lastName">Фамилия</label>
+                <input type="text" th:field="*{lastName}" id="lastName" placeholder="Фамилия">
+            </div>
+            <div class="input">
+                <label for="firstName">Имя</label>
+                <input type="text" th:field="*{firstName}" id="firstName" placeholder="Имя">
+            </div>
+            <div class="input">
+                <label for="patronymic">Отчество</label>
+                <input type="text" th:field="*{patronymic}" id="patronymic" placeholder="Отчество">
+            </div>
+            <div class="input">
+                <label for="productionDivision">Участок</label>
+                <select class="form-control" id="productionDivision" name="productionDivision">
+                    <option value="0">выберите участок</option>
+                    <option th:each="productionDivision : ${productionDivisions}" th:value="${productionDivision}"
+                        th:text="${productionDivision}"></option>
+                </select>
+            </div>
+            <div class="input">
+                <label for="company">Компания</label>
+                <select class="form-control" th:field="*{company}" id="company">
+                    <option value="0">выберите компанию</option>
+                    <option th:each="company : ${companies}" th:value="${company}" th:text="${company}"></option>
+                </select>
+            </div>
+            <div class="input">
+                <label for="specialization">Специальность</label>
+                <input type="text" th:field="*{specialization}" id="specialization" placeholder="Специальность">
+            </div>
+            <div class="input">
+                <button class="button" type="submit" value="Create employee">Создать</button>
+            </div>
+        </form>
+    </div>
+
+    <form class="button_form" action="/" method="get">
+        <button class="button" type="submit">Вернуться</button>
+    </form>
+
+
+</body>
+
+</html>

@@ -2,10 +2,13 @@ package workwear.workwear.controller;
 
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
+import workwear.workwear.model.WorkWear;
 import workwear.workwear.model.WorkWearIssued;
 import workwear.workwear.service.WorkWearIssuedService;
+import workwear.workwear.service.WorkWearService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/work_wear_issued")
@@ -13,7 +16,7 @@ import java.util.List;
 public class WorkWearIssuedController {
 
     private final WorkWearIssuedService workWearIssuedService;
-
+    private final WorkWearService workWearService;
     @GetMapping("work_wear_issued_all")
     public List<WorkWearIssued> findAllWorkWearIssued() {
         return workWearIssuedService.findAllWorkWearIssued();
@@ -48,6 +51,10 @@ public class WorkWearIssuedController {
     @GetMapping("work_wear_issued_to_be_replace")
     public List<WorkWearIssued> findWorkWearIssuedToBeReplaced() {
         return workWearIssuedService.findWorkWearIssuedToBeReplaced();
+    }
+    @GetMapping("/work_wear_issued_employee_id/{id}")
+    Map<WorkWearIssued,WorkWear> findWorkWearIssuedEmployee(@PathVariable Long id){
+        return workWearIssuedService.findWorkWearIssuedEmployee(id);
     }
 }
 

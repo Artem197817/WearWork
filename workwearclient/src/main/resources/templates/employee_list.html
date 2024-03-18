@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Wear</title>
+    <link th:href="@{/styles/employee_list.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="header">
+        <p>Сотрудники</p>
+        <p><span th:text="${message}"></span></p>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Участок</th>
+                <th>Компания</th>
+                <th>Специальность</th>
+                <th>Редактировать</th>
+                <th>Удалить</th>
+                <th>Выдано</th>
+                <th>Выдать</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.lastName}"></td>
+                <td th:text="${employee.firstName}"></td>
+                <td th:text="${employee.patronymic}"></td>
+                <td th:text="${employee.productionDivision}"></td>
+                <td th:text="${employee.company}"></td>
+                <td th:text="${employee.specialization}"></td>
+                <td><a th:href="@{employee_update/{id}(id=${employee.id})}">Редактировать</a></td>
+                <td><a th:href="@{employee_delete/{id}(id=${employee.id})}">Удалить</a></td>
+                <td><a th:href="@{employee_issue/{id}(id=${employee.id})}">Выдано</a></td>
+                <td><a th:href="@{issue/{id}(id=${employee.id})}">Выдать</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form class="button_form" action="/" method="get">
+        <button class="button" type="submit">Вернуться</button>
+    </form>
+
+</body>
+
+</html>

@@ -4,6 +4,7 @@ package workwear.workwearclient.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import workwear.workwearclient.clientApi.WorkShoesIssuedApiClient;
+import workwear.workwearclient.model.WorkShoes;
 import workwear.workwearclient.model.WorkShoesIssued;
 import workwear.workwearclient.service.WorkShoesIssuedService;
 import workwear.workwearclient.view.input.InputValue;
@@ -11,6 +12,7 @@ import workwear.workwearclient.view.output.Output;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @AllArgsConstructor
@@ -43,4 +45,7 @@ public class WorkShoesIssuedController {
         return workShoesIssuedApiClient.findWorkShoesIssuedByEmployeeID(employeeId);
     }
 
+    public Map<WorkShoesIssued,WorkShoes> findWorkShoesIssuedEmployee (Long id){
+        return workShoesIssuedApiClient.findWorkShoesIssuedEmployee(id);
+    }
 }

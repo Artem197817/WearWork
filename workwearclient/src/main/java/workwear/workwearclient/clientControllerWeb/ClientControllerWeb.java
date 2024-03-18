@@ -21,7 +21,11 @@ public class ClientControllerWeb {
     }
 
     @GetMapping("workwear")
-    public String workwear() {
+    public String workWear() {
         return "workwear";
+    }
+    @GetMapping("workshoes")
+    public String workShoes() {
+        return "workshoes";
     }
 }

@@ -8,8 +8,7 @@ import workwear.workwear.model.WorkWearIssued;
 import workwear.workwear.repository.WorkWearIssuedRepository;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -70,4 +69,16 @@ public class WorkWearIssuedServiceImpl implements WorkWearIssuedService {
                 filter(workWearIssued -> workWearIssued.getReplacementDate().isBefore(localDateControl))
                 .toList();
     }
+
+    @Override
+    public Map<WorkWearIssued,WorkWear> findWorkWearIssuedEmployee(Long id) {
+        List<WorkWearIssued> workWearIssuedList = findWorkWearIssuedByEmployeeId(id);
+        Map<WorkWearIssued,WorkWear>  workWearMap = new HashMap<>();
+        if (workWearIssuedList.isEmpty()) return new HashMap<>();
+        for (WorkWearIssued wwi: workWearIssuedList){
+            workWearMap.put(wwi,workWearService.findById(wwi.getWorkWearId()));
+        }
+        return workWearMap;
+    }
 }
+

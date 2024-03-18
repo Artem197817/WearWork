@@ -2,6 +2,10 @@ package workwear.workwearclient.model.modelEnum;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 @Getter
 public enum ProductionDivision {
     D_110_15("110-15"),
@@ -38,6 +42,11 @@ public enum ProductionDivision {
     @JsonValue
     private final String value;
 
+    public String getValue() {
+        if (value == null) return "NONE";
+        return value;
+    }
+
     ProductionDivision(String value) {
         this.value = value;
     }
@@ -59,4 +68,15 @@ public enum ProductionDivision {
         }
         return valuesShoes;
     }
+    public static List<String> getValuesString() {
+        List<String> stringList = new ArrayList<>();
+        for (ProductionDivision w : values()) {
+           stringList.add( w.getValue());
+        }
+        return stringList;
+    }
+    public static List<ProductionDivision> getValues (){
+        return List.of(values());
+    }
+
 }
