@@ -1,11 +1,9 @@
 .header {
-    font-size: 80px;
     text-align: center;
     height: 200px;
     background-color: rgb(69, 102, 247);
     font-weight: bolder;
     color: aliceblue;
-
 }
 
 .content {
@@ -31,8 +29,9 @@
     margin: 25px;
 
 }
+
 .input {
-    display:block;
+    display: block;
     margin-left: 50px;
     height: 80px;
     width: 350px;
@@ -41,7 +40,9 @@
     font-size: 20px;
     align-items: center;
 }
-input,select {
+
+input,
+select {
     width: 250px;
     height: 50 px;
     font-size: 20px;
@@ -49,14 +50,23 @@ input,select {
     margin: 10px;
     margin-left: 50px;
 }
+
 label {
     margin-left: 60px;
     margin-bottom: 5px;
     display: block;
     font-size: 20px;
 }
+
 p,
 a {
+    font-size: 20px;
+    margin: 6px;
+    color: aliceblue;
+}
+
+.p {
+    font-size: 20px;
     margin: 6px;
     color: aliceblue;
 }

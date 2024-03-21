@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import workwear.workshoes.model.WorkShoes;
 import workwear.workshoes.model.WorkShoesIssued;
+import workwear.workshoes.model.WorkShoesIssuedView;
 import workwear.workshoes.repository.WorkShoesIssuedRepository;
 
 import java.time.LocalDate;
@@ -66,13 +67,13 @@ public class WorkShoesIssuedServiceImpl implements WorkShoesIssuedService {
     }
 
     @Override
-    public Map<WorkShoesIssued,WorkShoes> findWorkShoesIssuedEmployee(Long id) {
+    public List<WorkShoesIssuedView> findWorkShoesIssuedEmployee(Long id) {
         List<WorkShoesIssued> workShoesIssuedList = findWorkShoesIssuedByEmployeeId(id);
-        Map<WorkShoesIssued,WorkShoes>  workShoesMap = new HashMap<>();
-        if (workShoesIssuedList.isEmpty()) return new HashMap<>();
-        for(WorkShoesIssued wsi: workShoesIssuedList){
-            workShoesMap.put(wsi,workShoesService.findById(wsi.getWorkShoesId()));
+        List<WorkShoesIssuedView> workShoesIssuedViewList = new ArrayList<>();
+        if (workShoesIssuedList.isEmpty()) return workShoesIssuedViewList;
+        for (WorkShoesIssued wsi : workShoesIssuedList) {
+            workShoesIssuedViewList.add(new WorkShoesIssuedView(wsi, workShoesService.findById(wsi.getWorkShoesId())));
         }
-        return workShoesMap;
+        return workShoesIssuedViewList;
     }
 }

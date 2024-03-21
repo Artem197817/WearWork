@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class EmployeeController {
 
-   private final EmployeeApiClient employeeApiClient;
+    private final EmployeeApiClient employeeApiClient;
     private final InputValue inputValue;
     private final EmployeeService employeeService;
     private final Output output;
@@ -42,12 +42,16 @@ public class EmployeeController {
         employeeApiClient.deleteEmployee(inputValue.inputLong("id"));
     }
 
-    public void deleteEmployeeById (Long id){
+    public void deleteEmployeeById(Long id) {
         employeeApiClient.deleteEmployee(id);
     }
 
     public Employee findById() {
         return employeeApiClient.findById(inputValue.inputLong("id сотрудника"));
+    }
+
+    public Employee findById(Long id) {
+        return employeeApiClient.findById(id);
     }
 
     public Employee updateEmployee() {

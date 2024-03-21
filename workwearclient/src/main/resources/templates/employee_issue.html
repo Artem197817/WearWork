@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Wear</title>
+    <link th:href="@{/styles/employee_list.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="header">
+        <p>Выдано</p>
+        <p><span th:text="${message}"></span></p>
+    </div>
+    <h1>Рабочая одежда</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Модель</th>
+                <th>Тип спецодежды</th>
+                <th>Размер</th>
+                <th>Рост</th>
+                <th>Дата выдачи</th>
+                <th>Дата замены</th>
+                <th>Списать</th>
+                <th>Вернуть</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="wear : ${wears}">
+                <td th:text="${wear.modelWorkWear}"></td>
+                <td th:text="${wear.workWearType}"></td>
+                <td th:text="${wear.workWearSize}"></td>
+                <td th:text="${wear.workWearHeight}"></td>
+                <td th:text="${#temporals.format(wear.dateIssued, 'dd-MM-yyyy ')}"></td>
+                <td th:text="${#temporals.format(wear.replacementDate, 'dd-MM-yyyy ')}"></td>
+                <td><a th:href="@{delete/{id}(id=${wear.workWearIssuedId})}">Списать</a></td>
+                <td><a th:href="@{return/{id}(id=${wear.workWearIssuedId})}">Вернуть</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <h1>Рабочая обувь</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Модель</th>
+                <th>Тип обуви</th>
+                <th>Размер</th>
+                <th>Дата выдачи</th>
+                <th>Дата замены</th>
+                <th>Списать</th>
+                <th>Вернуть</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="shoes : ${shoesList}">
+                <td th:text="${shoes.modelWorkShoes}"></td>
+                <td th:text="${shoes.workShoesType}"></td>
+                <td th:text="${shoes.workShoesSize}"></td>
+                <td th:text="${#temporals.format(shoes.dateIssued, 'dd-MM-yyyy ')}"></td>
+                <td th:text="${#temporals.format(shoes.replacementDate, 'dd-MM-yyyy ')}"></td>
+                <td><a th:href="@{delete_shoes/{id}(id=${shoes.workShoesIssuedId})}">Списать</a></td>
+                <td><a th:href="@{return_shoes/{id}(id=${shoes.workShoesIssuedId})}">Вернуть</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <form class="button_form" action="/" method="get">
+        <button class="button" type="submit">Вернуться</button>
+    </form>
+
+</body>

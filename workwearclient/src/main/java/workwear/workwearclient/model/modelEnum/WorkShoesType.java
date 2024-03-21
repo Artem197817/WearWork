@@ -42,5 +42,7 @@ public enum WorkShoesType {
         }
         return valuesShoes;
     }
-
+    public static  List<WorkShoesType> getValues(){
+        return List.of(values());
+    }
 }

@@ -3,6 +3,9 @@ package workwear.workwearclient.model.modelEnum;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
+import java.util.List;
+import java.util.stream.Stream;
+
 @Getter
 public enum WorkWearType {
 
@@ -37,5 +40,15 @@ public enum WorkWearType {
             valuesShoes[i++] = w.getValue();
         }
         return valuesShoes;
+    }
+
+    public static List<WorkWearType> getValues(){
+       return List.of(values());
+    }
+
+    public static List<String> getValuesString(){
+        return  Stream.of(values())
+                .map(WorkWearType::getValue)
+                .toList();
     }
 }

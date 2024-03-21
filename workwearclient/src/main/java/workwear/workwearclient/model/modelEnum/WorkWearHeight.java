@@ -3,6 +3,8 @@ package workwear.workwearclient.model.modelEnum;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 public enum WorkWearHeight {
     H_158_164("158-164"),
@@ -34,6 +36,10 @@ public enum WorkWearHeight {
             valuesShoes[i++] = w.getValue();
         }
         return valuesShoes;
+    }
+
+    public static List<WorkWearHeight> getValues (){
+        return List.of(values());
     }
 }
 

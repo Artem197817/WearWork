@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 import workwear.workshoes.model.WorkShoes;
 import workwear.workshoes.model.WorkShoesIssued;
+import workwear.workshoes.model.WorkShoesIssuedView;
 import workwear.workshoes.service.WorkShoesIssuedService;
 
 import java.util.List;
@@ -52,7 +53,7 @@ public class WorkShoesIssuedController {
         return workShoesIssuedService.findWorkShoesToBeReplaced();
     }
     @GetMapping("/work_shoes_issued_employee/{id}")
-    public Map<WorkShoesIssued,WorkShoes> findWorkShoesIssuedEmployee (@PathVariable Long id){
+    public List<WorkShoesIssuedView> findWorkShoesIssuedEmployee (@PathVariable Long id){
         return workShoesIssuedService.findWorkShoesIssuedEmployee(id);
     }
 }

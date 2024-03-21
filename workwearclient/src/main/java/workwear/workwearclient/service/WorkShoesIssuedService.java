@@ -8,13 +8,11 @@ import workwear.workwearclient.controller.WorkShoesController;
 import workwear.workwearclient.model.Employee;
 import workwear.workwearclient.model.WorkShoes;
 import workwear.workwearclient.model.WorkShoesIssued;
-import workwear.workwearclient.model.WorkShoesIssuedView;
 import workwear.workwearclient.view.input.InputValue;
 import workwear.workwearclient.view.output.Output;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 @Service
 @AllArgsConstructor
@@ -25,7 +23,6 @@ public class WorkShoesIssuedService {
     private final Output output;
     private final WorkShoesController workShoesController;
     private final WorkShoesService workShoesService;
-
 
 
     public WorkShoesIssued issuedWorkShoes() {
@@ -53,13 +50,6 @@ public class WorkShoesIssuedService {
         return new WorkShoesIssued(employee.getId(), idWorkShoes, monthPeriod);
     }
 
-    public List<WorkShoesIssuedView> createWorkShoesIssuedView (Map<WorkShoesIssued,WorkShoes> workShoesMap){
-        List<WorkShoesIssuedView> workShoesIssuedViewList = new ArrayList<>();
-        for(Map.Entry<WorkShoesIssued,WorkShoes> entry:workShoesMap.entrySet()){
-            workShoesIssuedViewList.add(new WorkShoesIssuedView(entry.getKey(),entry.getValue()));
-        }
-        return workShoesIssuedViewList;
-    }
 }
 
 

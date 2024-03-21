@@ -13,6 +13,7 @@ import workwear.workwearclient.view.output.Output;
 
 import java.util.List;
 
+
 @Service
 @AllArgsConstructor
 public class WorkWearIssueService {
@@ -46,7 +47,7 @@ public class WorkWearIssueService {
             return null;
         }
         Integer wearPeriod = inputValue.inputInt("Введите срок выдачи спецодежды в месяцах");
-        return new WorkWearIssued(employee.getId(), idWorkWear,wearPeriod);
+        return new WorkWearIssued(employee.getId(), idWorkWear, wearPeriod);
     }
 
 }

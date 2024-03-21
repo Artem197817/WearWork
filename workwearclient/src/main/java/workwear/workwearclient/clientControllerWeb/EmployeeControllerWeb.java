@@ -8,16 +8,15 @@ import workwear.workwearclient.controller.EmployeeController;
 import workwear.workwearclient.controller.WorkShoesIssuedController;
 import workwear.workwearclient.controller.WorkWearIssuedController;
 import workwear.workwearclient.model.Employee;
-import workwear.workwearclient.model.WorkShoes;
-import workwear.workwearclient.model.WorkShoesIssued;
-import workwear.workwearclient.model.WorkWear;
 import workwear.workwearclient.model.modelEnum.Company;
 import workwear.workwearclient.model.modelEnum.ProductionDivision;
+import workwear.workwearclient.model.modelview.WorkShoesIssuedView;
+import workwear.workwearclient.model.modelview.WorkWearIssuedView;
+import workwear.workwearclient.service.WorkShoesIssuedService;
+import workwear.workwearclient.service.WorkWearIssueService;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
+
 
 @Controller
 @AllArgsConstructor
@@ -27,6 +26,8 @@ public class EmployeeControllerWeb {
     private  final  EmployeeController employeeController;
     private final WorkShoesIssuedController workShoesIssuedController;
     private final WorkWearIssuedController workWearIssuedController;
+    private final WorkWearIssueService workWearIssueService;
+    private final WorkShoesIssuedService workShoesIssuedService;
 
     @GetMapping("/create")
     public String populateList(Employee  employee,Model model) {
@@ -64,21 +65,34 @@ public class EmployeeControllerWeb {
     }
 
     @PostMapping("/employee_update")
-    public String updateUser(Employee employee) {
+    public String updateUser(Employee employee) {// return logics add
         employeeController.saveEmployee(employee);
         return "redirect:/employee/search/all";
     }
 
     @GetMapping("/search/employee_delete/{id}")
-    public String deleteEmployee(@PathVariable Long id) { //Добавить логику проверяющую есть ли выданная спецодежда
-        employeeController.deleteEmployeeById(id);
+    public String deleteEmployee(@PathVariable Long id, Model model) {// return logics add
+        if (workWearIssuedController.findWorkWearIssuedEmployee(id).isEmpty()
+                && workShoesIssuedController.findWorkShoesIssuedEmployee(id).isEmpty()) {
+            employeeController.deleteEmployeeById(id);
+        }else{
+            model.addAttribute("message", "Необходимо списать одежду");
+        }
         return "redirect:/employee/search/all";
     }
 
     @GetMapping("/search/employee_issue/{id}")
     public String employeeIssued(@PathVariable Long id, Model model){
-
-         return "index";
+        List<WorkWearIssuedView> workWearIssuedViewList = workWearIssuedController.findWorkWearIssuedEmployee(id);
+        List<WorkShoesIssuedView> workShoesIssuedViewList = workShoesIssuedController.findWorkShoesIssuedEmployee(id);
+        Employee employee = employeeController.findById(id);
+        String message = employee.getLastName() + " "
+                + employee.getFirstName() + " "
+                + employee.getProductionDivision().getValue();
+        model.addAttribute("message", message);
+        model.addAttribute("wears",workWearIssuedViewList);
+        model.addAttribute("shoesList",workShoesIssuedViewList);
+         return "employee_issue";
     }
 
 

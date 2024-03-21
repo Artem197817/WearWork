@@ -1,14 +1,12 @@
-package workwear.workwearclient.model;
+package workwear.workshoes.model;
 
 import lombok.Data;
-import workwear.workwearclient.model.modelEnum.WorkShoesType;
 
 import java.time.LocalDate;
 
 @Data
 public class WorkShoesIssuedView {
 
-    private Long workShoesId;
     private String modelWorkShoes;
     private int workShoesSize;
     private String workShoesType;
@@ -16,8 +14,7 @@ public class WorkShoesIssuedView {
     private LocalDate replacementDate;
     private LocalDate dateIssued;
 
-    public WorkShoesIssuedView (WorkShoesIssued workShoesIssued,WorkShoes workShoes){
-        this.workShoesId = workShoes.getId();
+    public WorkShoesIssuedView (WorkShoesIssued workShoesIssued, WorkShoes workShoes){
         this.modelWorkShoes = workShoes.getModelWorkShoes();
         this.workShoesSize = workShoes.getWorkShoesSize();
         this.workShoesType = workShoes.getWorkShoesType().getValue();

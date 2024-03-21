@@ -12,6 +12,7 @@ import workwear.workwear.model.enumerated.WorkWearType;
 @NoArgsConstructor
 public class WorkWearTotal {
 
+
     private WorkWearType workWearType;
     private WorkWearSize workWearSize;
     private WorkWearHeight workWearHeight;

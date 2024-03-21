@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import workwear.workwearclient.clientApi.WorkWearApiClient;
 import workwear.workwearclient.model.WorkWear;
 import workwear.workwearclient.model.modelEnum.WorkWearType;
+import workwear.workwearclient.model.modelview.WorkWearArrival;
 import workwear.workwearclient.service.WorkWearService;
 import workwear.workwearclient.view.input.InputValue;
 
@@ -30,20 +31,31 @@ public class WorkWearController {
         workWearApiClient.saveAllWorkWear(workWearList);
     }
 
-    public void deleteWorkWear() {
-       workWearApiClient.deleteWorkWear( inputValue.inputLong("id"));
+    public void saveWorkWear(WorkWear workWear) {
+        workWearApiClient.saveWorkWear(workWear);
     }
 
+    public String saveWorkWear(WorkWearArrival workWearArrival) {
+        if (workWearArrival.getQuantity() <= 0) {return "Заданы неверные данные";}
+            workWearApiClient.saveAllWorkWear(workWearService.createWorkWearList(workWearArrival));
+        return "Сохранено "+ workWearArrival.getWorkWearType();
+    }
+
+    public void deleteWorkWear() {
+        workWearApiClient.deleteWorkWear(inputValue.inputLong("id"));
+    }
+
+
     public WorkWear findById() {
-       return workWearApiClient.findByID( inputValue.inputLong("id"));
+        return workWearApiClient.findByID(inputValue.inputLong("id"));
     }
 
     public List<WorkWear> findAllWorkWearByModelWorkWear() {
-      return workWearApiClient.findAllWorkWearByModelWorkWear(inputValue.input("Модель"));
+        return workWearApiClient.findAllWorkWearByModelWorkWear(inputValue.input("Модель"));
     }
 
     public List<WorkWear> findAllWorkWearByWorkWearType() {
-        WorkWearType workWearType = WorkWearType.getType(inputValue.inputEnum("Тип спецодежды",WorkWearType.class));
-     return workWearApiClient.findAllWorkWearByWorkWearType(workWearType);
+        WorkWearType workWearType = WorkWearType.getType(inputValue.inputEnum("Тип спецодежды", WorkWearType.class));
+        return workWearApiClient.findAllWorkWearByWorkWearType(workWearType);
     }
 }

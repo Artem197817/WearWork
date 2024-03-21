@@ -20,7 +20,6 @@ public class WorkWearTotalServiceImpl implements WorkWearTotalService {
 
     private final WorkWearService workWearService;
 
-
     @Override
     public List<WorkWearTotal> findWorkWearByTypeSortedNumber(WorkWearType workWearType) {
         int number = 0;

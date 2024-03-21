@@ -1,18 +1,16 @@
 package workwear.workwearclient.controller;
 
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import workwear.workwearclient.clientApi.WorkShoesIssuedApiClient;
-import workwear.workwearclient.model.WorkShoes;
 import workwear.workwearclient.model.WorkShoesIssued;
+import workwear.workwearclient.model.modelview.WorkShoesIssuedView;
 import workwear.workwearclient.service.WorkShoesIssuedService;
 import workwear.workwearclient.view.input.InputValue;
-import workwear.workwearclient.view.output.Output;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 @Controller
 @AllArgsConstructor
@@ -20,7 +18,6 @@ public class WorkShoesIssuedController {
 
     private WorkShoesIssuedService workShoesIssuedService;
     private final InputValue inputValue;
-    private final Output output;
     private final EmployeeController employeeController;
     private final WorkShoesIssuedApiClient workShoesIssuedApiClient;
 
@@ -45,7 +42,9 @@ public class WorkShoesIssuedController {
         return workShoesIssuedApiClient.findWorkShoesIssuedByEmployeeID(employeeId);
     }
 
-    public Map<WorkShoesIssued,WorkShoes> findWorkShoesIssuedEmployee (Long id){
-        return workShoesIssuedApiClient.findWorkShoesIssuedEmployee(id);
+    public List<WorkShoesIssuedView> findWorkShoesIssuedEmployee(Long id) {
+        List<WorkShoesIssuedView> workShoesIssuedViewList = workShoesIssuedApiClient.findWorkShoesIssuedEmployee(id);
+        if (workShoesIssuedViewList.isEmpty()) return new ArrayList<>();
+        return workShoesIssuedViewList;
     }
 }

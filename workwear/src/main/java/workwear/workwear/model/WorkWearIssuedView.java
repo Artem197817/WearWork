@@ -1,4 +1,4 @@
-package workwear.workwearclient.model;
+package workwear.workwear.model;
 
 import lombok.Data;
 
@@ -7,8 +7,6 @@ import java.time.LocalDate;
 @Data
 public class WorkWearIssuedView {
 
-
-    private Long workWearId;
     private String modelWorkWear;
     private String workWearType;
     private String workWearSize;
@@ -18,8 +16,7 @@ public class WorkWearIssuedView {
     private LocalDate dateIssued;
 
 
-    private WorkWearIssuedView(WorkWearIssued workWearIssued,WorkWear workWear){
-        this.workWearId = workWear.getId();
+    public WorkWearIssuedView(WorkWearIssued workWearIssued, WorkWear workWear){
         this.modelWorkWear=workWear.getModelWorkWear();
         this.workWearType = workWear.getWorkWearType().getValue();
         this.workWearSize = workWear.getWorkWearSize().getValue();

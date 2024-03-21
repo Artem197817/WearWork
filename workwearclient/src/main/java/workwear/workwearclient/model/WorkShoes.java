@@ -14,7 +14,6 @@ public class WorkShoes {
 
     private Long id;
     private String modelWorkShoes;
-
     private int workShoesSize;
     private WorkShoesType workShoesType;
 
