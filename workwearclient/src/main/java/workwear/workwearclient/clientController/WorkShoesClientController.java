@@ -28,7 +28,7 @@ public class WorkShoesClientController {
                 case 3 -> workShoesIssuedController.saveWorkShoesIssued();
                 case 4 -> workShoesIssuedController.findAllWorkShoesIssued().forEach(System.out::println);
                 case 5 -> workShoesIssuedController.findWorkShoesIssuedByEmployee().forEach(System.out::println);
-                case 6 -> workShoesIssuedController.deleteWorShoesIssued();
+                case 6 -> workShoesIssuedController.deleteWorkShoesIssued();
                 case 7 -> workShoesTotalController.findAllWorkShoesSortedNumber().forEach(System.out::println);
                 case 8 -> workShoesTotalController.findWorkShoesBySizeSortedNumber().forEach(System.out::println);
                 case 9 -> workShoesTotalController.findWorkShoesByTypeSortedNumber().forEach(System.out::println);

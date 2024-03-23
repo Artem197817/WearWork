@@ -1,12 +1,15 @@
 package workwear.workwearclient.service;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+
 import org.springframework.stereotype.Service;
 import workwear.workwearclient.model.Employee;
 import workwear.workwearclient.model.modelEnum.Company;
 import workwear.workwearclient.model.modelEnum.ProductionDivision;
+import workwear.workwearclient.model.modelview.EmployeeView;
 import workwear.workwearclient.view.input.InputValue;
+
+import java.util.List;
 
 
 @Service
@@ -25,6 +28,11 @@ public class EmployeeService {
             String specialization = inputValue.input("Профессия");
             return new Employee(firstName,lastName,patronymic,productionDivision,company,specialization);
         }
+    public List<EmployeeView> createEmployeeView(List<Employee>  employeeList){
+        return employeeList.stream()
+                .map(EmployeeView::new)
+                .toList();
+    }
 
     }
 

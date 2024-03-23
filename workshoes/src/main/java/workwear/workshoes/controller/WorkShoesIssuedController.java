@@ -28,7 +28,7 @@ public class WorkShoesIssuedController {
         return "WorkShoesIssued save";
     }
 
-    @GetMapping("work_shoes_issued_by_id/(id)")
+    @GetMapping("work_shoes_issued_by_id/{id}")
     public WorkShoesIssued findById(@PathVariable Long id) {
         return workShoesIssuedService.findById(id);
     }

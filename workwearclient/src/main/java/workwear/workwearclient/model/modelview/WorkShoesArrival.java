@@ -8,6 +8,6 @@ public class WorkShoesArrival {
 
     private String modelWorkShoes;
     private int workShoesSize;
-    private WorkShoesType workShoesType;
+    private String workShoesType;
     private int quantity;
 }

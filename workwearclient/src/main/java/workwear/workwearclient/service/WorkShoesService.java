@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import workwear.workwearclient.model.WorkShoes;
 import workwear.workwearclient.model.modelEnum.WorkShoesType;
+import workwear.workwearclient.model.modelview.WorkShoesArrival;
+import workwear.workwearclient.model.modelview.WorkShoesView;
 import workwear.workwearclient.view.input.InputValue;
 
 import java.util.*;
@@ -33,4 +35,19 @@ public class WorkShoesService {
         return workShoesList;
     }
 
+    public List<WorkShoes> createWorkShoes (WorkShoesArrival workShoesArrival){
+        List<WorkShoes> workShoesList = new ArrayList<>();
+        WorkShoesType workShoesType = WorkShoesType.getType(workShoesArrival.getWorkShoesType());
+        for (int i = 0; i < workShoesArrival.getQuantity() ; i++) {
+            workShoesList.add(new WorkShoes(workShoesArrival.getModelWorkShoes(),workShoesArrival.getWorkShoesSize(),
+                    workShoesType));
+        }
+        return workShoesList;
+    }
+
+    public List<WorkShoesView> createShoesView(List<WorkShoes> workShoesList){
+        return workShoesList.stream()
+                .map(WorkShoesView::new)
+                .toList();
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import workwear.workwearclient.clientApi.WorkShoesApiClient;
 import workwear.workwearclient.model.WorkShoes;
 import workwear.workwearclient.model.modelEnum.WorkShoesType;
+import workwear.workwearclient.model.modelview.WorkShoesArrival;
 import workwear.workwearclient.service.WorkShoesService;
 import workwear.workwearclient.view.input.InputValue;
 
@@ -47,6 +48,12 @@ public class WorkShoesController {
     public List<WorkShoes> findAllWorkShoesByWorkShoesType() {
         WorkShoesType workShoesType = WorkShoesType.getType(inputValue.inputEnum("Тип обуви", WorkShoesType.class));
         return workShoesApiClient.findAllWorkShoesByWorkShoesType(workShoesType);
+    }
+
+    public String saveWorkShoes(WorkShoesArrival workShoesArrival) {
+        if (workShoesArrival.getQuantity() < 0) {return "Заданы неверные данные";}
+        workShoesApiClient.saveAllWorkShoes(workShoesService.createWorkShoes(workShoesArrival));
+        return "Сохранено " + workShoesArrival.getWorkShoesType();
     }
 }
 

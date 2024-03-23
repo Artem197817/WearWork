@@ -47,7 +47,7 @@ public class EmployeeController {
         return employeeService.findAllEmployeeByProductionDivision(productionDivision);
     }
 
-    @GetMapping("/last_name/{lastName}")
+    @GetMapping("/lastname/{lastName}")
     public List<Employee> findAllEmployeeByLastName(@PathVariable String lastName) {
         return employeeService.findAllEmployeeByLastName(lastName);
     }

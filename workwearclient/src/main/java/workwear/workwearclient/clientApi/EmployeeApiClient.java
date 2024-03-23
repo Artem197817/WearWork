@@ -29,7 +29,7 @@ public interface EmployeeApiClient {
     @GetMapping("/pd/{productionDivision}")
     List<Employee> findAllEmployeeByProductionDivision(@PathVariable ProductionDivision productionDivision);
 
-    @GetMapping("/last_name/{lastName}")
+    @GetMapping("/lastname/{lastName}")
     List<Employee> findAllEmployeeByLastName(@PathVariable String lastName);
 
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Getter
 public enum WorkShoesType {
@@ -44,5 +45,11 @@ public enum WorkShoesType {
     }
     public static  List<WorkShoesType> getValues(){
         return List.of(values());
+    }
+
+    public static List<String> getValuesString(){
+        return  Stream.of(values())
+                .map(WorkShoesType::getValue)
+                .toList();
     }
 }

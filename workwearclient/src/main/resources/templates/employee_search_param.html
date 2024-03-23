@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/styles/employee_create.css}" rel="stylesheet" />
+    <title>Work Wear</title>
+</head>
+
+<body>
+    <div class="header">
+        <p>Сотрудники поиск</p>
+        <p class="p"><span th:text="${message}"></span></p>
+    </div>
+    <div class="content">
+        <form class="form" action="#" th:action="@{/employee/search/last_name}" method="get">
+
+            <div class="input">
+                <label for="lastName">Фамилия</label>
+                <input type="text" th:name="lastName" id="lastName" placeholder="Фамилия">
+            </div>
+
+            <div class="input">
+                <button class="long" type="submit" value="search">По фамилии</button>
+            </div>
+        </form>
+        <form class="form" action="#" th:action="@{/employee/search/division}" th:object="${productionDivision}"
+            th:value="${quantity}" method="get">
+
+            <div class="input">
+                <label for="productionDivision">Подразделение</label>
+                <select class="form-control" id="productionDivision" name="productionDivision">
+                    <option>подразделение</option>
+                    <option th:each="productionDivision : ${productionDivisions}" th:value="${productionDivision}"
+                        th:text="${productionDivision}"></option>
+                </select>
+            </div>
+
+            <div class="input">
+                <button class="long" type="submit" th:value="${productionDivision}" value="create productionDivision">По
+                    подразделению</button>
+            </div>
+
+        </form>
+    </div>
+
+    <form class="button_form" action="/employee/search" method="get">
+        <button class="button" type="submit">Вернуться</button>
+    </form>
+
+
+</body>
+
+</html>

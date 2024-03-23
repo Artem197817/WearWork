@@ -63,8 +63,15 @@ public class EmployeeController {
         return employeeApiClient.findAllEmployeeByProductionDivision(productionDivision);
     }
 
+    public List<Employee> findAllEmployeeByProductionDivision(ProductionDivision productionDivision) {
+        return employeeApiClient.findAllEmployeeByProductionDivision(productionDivision);
+    }
+
     public List<Employee> findEmployeeByLastName() {
         return employeeApiClient.findAllEmployeeByLastName(inputValue.input("Фамилия сотрудника"));
+    }
+    public List<Employee> findEmployeeByLastName(String lastName){
+        return  employeeApiClient.findAllEmployeeByLastName(lastName);
     }
 
     public Employee findEmployee() {

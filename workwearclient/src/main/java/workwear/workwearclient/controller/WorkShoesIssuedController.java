@@ -2,8 +2,10 @@ package workwear.workwearclient.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import workwear.workwearclient.clientApi.WorkShoesIssuedApiClient;
 import workwear.workwearclient.model.WorkShoesIssued;
+import workwear.workwearclient.model.WorkWearIssued;
 import workwear.workwearclient.model.modelview.WorkShoesIssuedView;
 import workwear.workwearclient.service.WorkShoesIssuedService;
 import workwear.workwearclient.view.input.InputValue;
@@ -32,8 +34,12 @@ public class WorkShoesIssuedController {
         workShoesIssuedApiClient.saveWorkShoesIssued(workShoesIssued);
     }
 
-    public void deleteWorShoesIssued() {
+    public void deleteWorkShoesIssued() {
         workShoesIssuedApiClient.deleteWorkShoesIssued(inputValue.inputLong("id удаляемой записи"));
+    }
+
+    public void deleteWorkShoesIssued(Long id) {
+        workShoesIssuedApiClient.deleteWorkShoesIssued(id);
     }
 
     public List<WorkShoesIssued> findWorkShoesIssuedByEmployee() {
@@ -46,5 +52,9 @@ public class WorkShoesIssuedController {
         List<WorkShoesIssuedView> workShoesIssuedViewList = workShoesIssuedApiClient.findWorkShoesIssuedEmployee(id);
         if (workShoesIssuedViewList.isEmpty()) return new ArrayList<>();
         return workShoesIssuedViewList;
+    }
+
+    public WorkShoesIssued findById(Long id) {
+        return workShoesIssuedApiClient.findById(id);
     }
 }

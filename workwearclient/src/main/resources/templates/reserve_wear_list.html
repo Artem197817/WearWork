@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Wear</title>
+    <link th:href="@{/styles/employee_list.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="header">
+        <p>Запасы одежда</p>
+        <p><span th:text="${message}"></span></p>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th class="type">Тип</th>
+                <th>Размер</th>
+                <th>Рост</th>
+                <th>Количество</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="workwear : ${workWearTotalViewList}">
+                <td class="type" th:text="${workwear.workWearType}"></td>
+                <td th:text="${workwear.workWearSize}"></td>
+                <td th:text="${workwear.workWearHeight}"></td>
+                <td th:text="${workwear.number}"></td>
+        </tbody>
+    </table>
+
+    <form class="button_form" action="/reserve/workwear" method="get">
+        <button class="button" type="submit">Вернуться</button>
+    </form>
+
+</body>
+
+</html>

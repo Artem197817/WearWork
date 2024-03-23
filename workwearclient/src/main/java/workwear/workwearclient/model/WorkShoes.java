@@ -23,6 +23,10 @@ public class WorkShoes {
         this.modelWorkShoes = modelWorkShoes;
         this.workShoesSize = Integer.parseInt(workShoesSize);
         this.workShoesType = workShoesType;
-
+    }
+    public WorkShoes(String modelWorkShoes, Integer workShoesSize, WorkShoesType workShoesType) {
+        this.modelWorkShoes = modelWorkShoes;
+        this.workShoesSize = workShoesSize;
+        this.workShoesType = workShoesType;
     }
 }

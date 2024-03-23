@@ -8,10 +8,14 @@ import workwear.workwearclient.controller.EmployeeController;
 import workwear.workwearclient.controller.WorkShoesIssuedController;
 import workwear.workwearclient.controller.WorkWearIssuedController;
 import workwear.workwearclient.model.Employee;
+import workwear.workwearclient.model.WorkShoesIssued;
+import workwear.workwearclient.model.WorkWearIssued;
 import workwear.workwearclient.model.modelEnum.Company;
 import workwear.workwearclient.model.modelEnum.ProductionDivision;
+import workwear.workwearclient.model.modelview.EmployeeView;
 import workwear.workwearclient.model.modelview.WorkShoesIssuedView;
 import workwear.workwearclient.model.modelview.WorkWearIssuedView;
+import workwear.workwearclient.service.EmployeeService;
 import workwear.workwearclient.service.WorkShoesIssuedService;
 import workwear.workwearclient.service.WorkWearIssueService;
 
@@ -23,51 +27,54 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeControllerWeb {
 
-    private  final  EmployeeController employeeController;
+    private final EmployeeController employeeController;
     private final WorkShoesIssuedController workShoesIssuedController;
     private final WorkWearIssuedController workWearIssuedController;
     private final WorkWearIssueService workWearIssueService;
     private final WorkShoesIssuedService workShoesIssuedService;
+    private final EmployeeService employeeService;
 
     @GetMapping("/create")
-    public String populateList(Employee  employee,Model model) {
+    public String populateList(Employee employee, Model model) {
         List<ProductionDivision> productionDivisions = ProductionDivision.getValues();
         model.addAttribute("productionDivisions", productionDivisions);
         List<Company> companies = Company.getValues();
-        model.addAttribute("companies",companies);
+        model.addAttribute("companies", companies);
         return "employee_create";
     }
 
     @PostMapping("/create")
-    public String saveEmployee(Employee employee){
+    public String saveEmployee(Employee employee) {
         employeeController.saveEmployee(employee);
         return "redirect:/employee/create";
     }
 
     @GetMapping("/search")
-    public String searchEmployee(){
+    public String searchEmployee() {
         return "employee_search";
     }
+
     @GetMapping("/search/all")
-    public  String allEmployee(Model model){
-        List<Employee> employees = employeeController.findAllEmployee();
-        model.addAttribute("employees",employees);
+    public String allEmployee(Model model) {
+        List<EmployeeView> employees = employeeService.createEmployeeView(employeeController.findAllEmployee());
+        model.addAttribute("employees", employees);
         model.addAttribute("message", "Все сотрудники");
         return "employee_list";
     }
+
     @GetMapping(value = "search/employee_update/{id}")
     public String updateUserForm(Employee employee, Model model) {
         List<ProductionDivision> productionDivisions = ProductionDivision.getValues();
         model.addAttribute("productionDivisions", productionDivisions);
         List<Company> companies = Company.getValues();
-        model.addAttribute("companies",companies);
+        model.addAttribute("companies", companies);
         return "employee_update";
     }
 
     @PostMapping("/employee_update")
     public String updateUser(Employee employee) {// return logics add
         employeeController.saveEmployee(employee);
-        return "redirect:/employee/search/all";
+        return "redirect:/employee/search";
     }
 
     @GetMapping("/search/employee_delete/{id}")
@@ -75,14 +82,14 @@ public class EmployeeControllerWeb {
         if (workWearIssuedController.findWorkWearIssuedEmployee(id).isEmpty()
                 && workShoesIssuedController.findWorkShoesIssuedEmployee(id).isEmpty()) {
             employeeController.deleteEmployeeById(id);
-        }else{
+        } else {
             model.addAttribute("message", "Необходимо списать одежду");
         }
-        return "redirect:/employee/search/all";
+        return "redirect:/employee/search";
     }
 
     @GetMapping("/search/employee_issue/{id}")
-    public String employeeIssued(@PathVariable Long id, Model model){
+    public String employeeIssued(@PathVariable Long id, Model model) {
         List<WorkWearIssuedView> workWearIssuedViewList = workWearIssuedController.findWorkWearIssuedEmployee(id);
         List<WorkShoesIssuedView> workShoesIssuedViewList = workShoesIssuedController.findWorkShoesIssuedEmployee(id);
         Employee employee = employeeController.findById(id);
@@ -90,10 +97,61 @@ public class EmployeeControllerWeb {
                 + employee.getFirstName() + " "
                 + employee.getProductionDivision().getValue();
         model.addAttribute("message", message);
-        model.addAttribute("wears",workWearIssuedViewList);
-        model.addAttribute("shoesList",workShoesIssuedViewList);
-         return "employee_issue";
+        model.addAttribute("wears", workWearIssuedViewList);
+        model.addAttribute("shoesList", workShoesIssuedViewList);
+        return "employee_issue";
     }
 
+    @GetMapping("/search/param")
+    public String searchParam(Model model) {
+        List<String> productionDivisions = ProductionDivision.getValuesString();
+        model.addAttribute("productionDivisions", productionDivisions);
+        return "employee_search_param";
+    }
 
+    @GetMapping("/search/last_name")
+    public String searchLastname(String lastName, Model model) {
+        if (lastName == null || lastName.isEmpty()) return "redirect:/employee/search/param";
+        List<EmployeeView> employeeViewList = employeeService.createEmployeeView(employeeController
+                .findEmployeeByLastName(lastName));
+        model.addAttribute("employees", employeeViewList);
+        return "employee_list";
+    }
+
+    @GetMapping("/search/division")
+    public String searchByDivision(String productionDivision, Model model) {
+        ProductionDivision productionDivisionEnum = ProductionDivision.getType(productionDivision);
+        List<EmployeeView> employeeViewList = employeeService.createEmployeeView((employeeController
+                .findAllEmployeeByProductionDivision(productionDivisionEnum)));
+        model.addAttribute("employees", employeeViewList);
+        return "employee_list";
+    }
+
+    @GetMapping("/search/employee_issue/return/{id}")
+    public String returnStorageWear (@PathVariable Long id, Model model) {
+        // Добавить логику возврата
+        WorkWearIssued workWearIssued = workWearIssuedController.findWorkWearIssuedById(id);
+        return "redirect:/employee/search/employee_issue/" + workWearIssued.getEmployeeId();
+    }
+
+    @GetMapping("/search/employee_issue/return_shoes/{id}")
+    public String returnStorageShoes (@PathVariable Long id, Model model) {
+        // Добавить логику возврата
+        WorkShoesIssued workShoesIssued = workShoesIssuedController.findById(id);
+        return "redirect:/employee/search/employee_issue/" + workShoesIssued.getEmployeeId();
+    }
+
+    @GetMapping("/search/employee_issue/delete/{id}")
+    public String deleteEmployeeWear (@PathVariable Long id){
+        WorkWearIssued workWearIssued = workWearIssuedController.findWorkWearIssuedById(id);
+        workWearIssuedController.deleteWorkWearIssued(id);
+        return "redirect:/employee/search/employee_issue/" + workWearIssued.getEmployeeId();
+    }
+
+    @GetMapping("/search/employee_issue/delete_shoes/{id}")
+    public String deleteEmployeeShoes (@PathVariable Long id){
+        WorkShoesIssued workShoesIssued = workShoesIssuedController.findById(id);
+        workShoesIssuedController.deleteWorkShoesIssued(id);
+        return "redirect:/employee/search/employee_issue/" + workShoesIssued.getEmployeeId();
+    }
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Getter
 public enum Company {
@@ -37,15 +38,13 @@ public enum Company {
         return valuesShoes;
     }
 
-    public static List<String> getValuesString(){
-        List<String> stringList = new ArrayList<>();
-        for (Company w : values()) {
-            stringList.add(w.getValue());
-        }
-        return stringList;
-    }
-
     public static List<Company> getValues(){
         return List.of(values());
+    }
+
+    public static List<String> getValuesString(){
+        return  Stream.of(values())
+                .map(Company::getValue)
+                .toList();
     }
 }

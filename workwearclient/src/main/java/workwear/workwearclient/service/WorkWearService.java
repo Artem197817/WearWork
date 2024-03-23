@@ -8,6 +8,7 @@ import workwear.workwearclient.model.modelEnum.WorkWearHeight;
 import workwear.workwearclient.model.modelEnum.WorkWearSize;
 import workwear.workwearclient.model.modelEnum.WorkWearType;
 import workwear.workwearclient.model.modelview.WorkWearArrival;
+import workwear.workwearclient.model.modelview.WorkWearView;
 import workwear.workwearclient.view.input.InputValue;
 
 import java.util.*;
@@ -46,6 +47,14 @@ public class WorkWearService {
         }
         return workWearList;
     }
+
+    public List<WorkWearView> createWorkWearView(List<WorkWear> workWearList){
+        return workWearList.stream()
+                .map(WorkWearView::new)
+                .toList();
+    }
+
+
 }
 
     

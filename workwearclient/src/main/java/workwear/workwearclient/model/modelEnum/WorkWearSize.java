@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @Getter
 public enum WorkWearSize {
@@ -45,5 +46,11 @@ public enum WorkWearSize {
     }
     public static List<WorkWearSize> getValues(){
         return List.of(values());
+    }
+
+    public static List<String> getValuesString(){
+        return  Stream.of(values())
+                .map(WorkWearSize::getValue)
+                .toList();
     }
 }

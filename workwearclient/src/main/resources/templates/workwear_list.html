@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Wear</title>
+    <link th:href="@{/styles/employee_list.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="header">
+        <p>Рабочая одежда</p>
+        <p><span th:text="${message}"></span></p>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Модель</th>
+                <th class="type">Тип</th>
+                <th>Размер</th>
+                <th>Рост</th>
+                <th>Редактировать</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="workwear : ${workWearViewList}">
+                <td th:text="${workwear.id}"></td>
+                <td th:text="${workwear.modelWorkWear}"></td>
+                <td class="type" th:text="${workwear.workWearType}"></td>
+                <td th:text="${workwear.workWearSize}"></td>
+                <td th:text="${workwear.workWearHeight}"></td>
+                <td><a th:href="@{workwear_update/{id}(id=${workwear.id})}">Редактировать</a></td>
+                <td><a th:href="@{workwear_delete/{id}(id=${workwear.id})}">Удалить</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form class="button_form" action="/workwear/search"  method="get">
+        <button class="button" type="submit">Вернуться</button>
+    </form>
+    <link th:value="${status}"> </link>
+</body>
+
+</html>

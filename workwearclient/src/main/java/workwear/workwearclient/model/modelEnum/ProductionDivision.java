@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 
 @Getter
@@ -69,12 +70,11 @@ public enum ProductionDivision {
         return valuesShoes;
     }
     public static List<String> getValuesString() {
-        List<String> stringList = new ArrayList<>();
-        for (ProductionDivision w : values()) {
-           stringList.add( w.getValue());
+            return  Stream.of(values())
+                    .map(ProductionDivision::getValue)
+                    .toList();
         }
-        return stringList;
-    }
+
     public static List<ProductionDivision> getValues (){
         return List.of(values());
     }

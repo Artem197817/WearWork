@@ -16,7 +16,7 @@ public interface WorkShoesIssuedApiClient {
     @PostMapping("/save_work_shoes_issued")
     String saveWorkShoesIssued(@RequestBody WorkShoesIssued workShoesIssued);
 
-    @GetMapping("/work_shoes_issued_by_id/(id)")
+    @GetMapping("/work_shoes_issued_by_id/{id}")
     WorkShoesIssued findById(@PathVariable Long id);
 
     @PutMapping("/work_shoes_issued_update/{workShoesIssued}")

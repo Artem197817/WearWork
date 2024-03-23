@@ -23,7 +23,7 @@ public class WorkWearIssuedController {
         return workWearIssuedService.findAllWorkWearIssued();
     }
 
-    @GetMapping("work_wear_issued_by_id")
+    @GetMapping("work_wear_issued_by_id/{id}")
     public WorkWearIssued findWorkWearIssuedById(@PathVariable Long id) {
         return workWearIssuedService.findWorkWearIssuedById(id);
     }
