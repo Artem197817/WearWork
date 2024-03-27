@@ -26,8 +26,8 @@ public class WorkWearController {
         return "WorkShoes successfully saved";
     }
 
-    @GetMapping("/{id}")
-    public WorkWear findByID(@PathVariable Long id) {
+    @GetMapping("find/{id}")
+    public WorkWear findById(@PathVariable Long id) {
         return workWearService.findById(id);
     }
 

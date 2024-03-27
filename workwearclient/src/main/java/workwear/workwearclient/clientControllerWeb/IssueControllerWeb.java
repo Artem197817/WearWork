@@ -43,7 +43,6 @@ public class IssueControllerWeb {
 
     @GetMapping("/issue")
     public String issue(ModelAndView modelAndView) {
-        var id = modelAndView.getModelMap().getAttribute("id");
         return "redirect:/issue";
     }
 

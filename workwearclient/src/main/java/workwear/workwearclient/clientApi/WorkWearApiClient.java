@@ -17,8 +17,8 @@ public interface WorkWearApiClient {
     @PostMapping("/save_work_wear")
     String saveWorkWear(@RequestBody WorkWear workWear);
 
-    @GetMapping("/{id}")
-    WorkWear findByID(@PathVariable Long id);
+    @GetMapping("find/{id}")
+    WorkWear findById(@PathVariable Long id);
 
     @PutMapping("/update_work_wear")
     WorkWear updateWorkWear(@RequestBody WorkWear workWear);

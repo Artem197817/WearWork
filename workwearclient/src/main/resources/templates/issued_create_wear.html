@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/styles/employee_create.css}" rel="stylesheet" />
+    <title>Work Wear</title>
+</head>
+
+<body>
+    <div class="header">
+        <p>Период эксплуатации ввод</p>
+        <p class="p"><span th:text="${message}"></span></p>
+    </div>
+    <div class="content">
+        <form class="form" action="#" th:action="@{/issue/wear/create}" th:object="${wearIssuedView}"
+         method="post">
+            <div class="input">
+                <label for="employeeId">Id сотрудника </label>
+                <input readonly type="number" th:field="*{employeeId}" id="employeeId" placeholder="id">
+            </div>
+
+            <div class="input">
+                <label for="workWearId">Id спецодежды</label>
+                <input readonly type="text" th:field="*{workWearId}" id="workWearId" placeholder="id">
+            </div>
+
+            <div class="input">
+                <label for="monthPeriod">Период эксплуатации </label>
+                <input type="number" th:field="*{monthPeriod}" id="monthPeriod" placeholder="месяцы">
+            </div>
+
+            <div class="input">
+                <button class="button" type="submit" value="Create workWear">Записать</button>
+            </div>
+        </form>
+    </div>
+
+    <form class="button_form" action="/issue" method="get">
+        <button class="button" type="submit">Вернуться</button>
+    </form>
+
+
+</body>
+
+</html>

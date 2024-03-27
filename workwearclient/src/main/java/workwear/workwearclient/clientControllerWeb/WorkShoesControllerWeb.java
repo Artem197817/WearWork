@@ -12,7 +12,8 @@ import workwear.workwearclient.model.modelview.WorkShoesView;
 import workwear.workwearclient.service.WorkShoesService;
 
 
-import java.util.ArrayList;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
@@ -84,14 +85,17 @@ public class WorkShoesControllerWeb {
         model.addAttribute("workShoesViewList", workShoesViewList);
         return "workshoes_list";
     }
+
     @GetMapping("/workshoes_delete/{id}")
-    public String deleteWorkShoesById(@PathVariable Long id){
+    public String deleteWorkShoesById(@PathVariable Long id) {
+        String type = workShoesController.findById(id).getWorkShoesType().getValue();
+        String path = URLEncoder.encode(type, StandardCharsets.UTF_8);
         workShoesController.deleteWorkShoes(id);
-        return "redirect:/workshoes/search";
+        return "redirect:/workshoes/search/type?workShoesType=" + path;
     }
 
-    @GetMapping ("/workshoes_update/{id}")
-    public String updateWorkShoes (WorkShoes workShoes, Long id, Model model){
+    @GetMapping("/workshoes_update/{id}")
+    public String updateWorkShoes(WorkShoes workShoes, Long id, Model model) {
         List<WorkShoesType> workShoesTypeList = WorkShoesType.getValues();
         model.addAttribute("workShoesTypeList", workShoesTypeList);
         List<Integer> workShoesSizeList = workShoesService.createSizeList();
@@ -100,12 +104,9 @@ public class WorkShoesControllerWeb {
     }
 
     @PostMapping("/update/shoes")
-    public String updateWorkShoes(WorkShoes workShoes, Model model){
-        List<WorkShoes> workShoesList = new ArrayList<>();
-        workShoesList.add(workShoes);
-        List<WorkShoesView> workShoesViewList = workShoesService.createShoesView(workShoesList);
-        model.addAttribute("workShoesViewList", workShoesViewList);
+    public String updateWorkShoes(WorkShoes workShoes, Model model) {
+        String path = URLEncoder.encode(workShoes.getWorkShoesType().getValue(), StandardCharsets.UTF_8);
         workShoesController.saveWorkShoes(workShoes);
-        return "workshoes_list";
+        return "redirect:/workshoes/search/type?workShoesType=" + path;
     }
 }

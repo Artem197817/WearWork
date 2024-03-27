@@ -21,8 +21,7 @@
                 <th class="type">Тип</th>
                 <th>Размер</th>
                 <th>Рост</th>
-                <th>Редактировать</th>
-                <th>Удалить</th>
+                <th>Выдать</th>
             </tr>
         </thead>
         <tbody>
@@ -32,16 +31,14 @@
                 <td class="type" th:text="${workwear.workWearType}"></td>
                 <td th:text="${workwear.workWearSize}"></td>
                 <td th:text="${workwear.workWearHeight}"></td>
-                <td><a th:href="@{/workwear/workwear_update/{id}(id=${workwear.id})}">Редактировать</a></td>
-                <td><a th:href="@{/workwear/workwear_delete/{id}(id=${workwear.id})}">Удалить</a></td>
+                <td><a th:href="@{/issue/wear/{wearid}/{id}(wearid=${workwear.id}, id=${id})}">Выдать</a></td>
             </tr>
         </tbody>
     </table>
 
-    <form class="button_form" action="/workwear/search"  method="get">
+    <form class="button_form" action="/issue"  method="get">
         <button class="button" type="submit">Вернуться</button>
     </form>
-    <link th:value="${status}"> </link>
 </body>
 
 </html>

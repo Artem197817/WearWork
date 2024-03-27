@@ -3,7 +3,6 @@ package workwear.workwearclient.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import workwear.workwearclient.clientApi.WorkWearApiClient;
 import workwear.workwearclient.model.WorkWear;
 import workwear.workwearclient.model.modelEnum.WorkWearSize;
@@ -43,13 +42,17 @@ public class WorkWearController {
         return "Сохранено "+ workWearArrival.getWorkWearType();
     }
 
-    public void deleteWorkWear() {
-        workWearApiClient.deleteWorkWear(inputValue.inputLong("id"));
+    public void deleteWorkWear(Long id) {
+        workWearApiClient.deleteWorkWear(id);
     }
 
 
     public WorkWear findById() {
-        return workWearApiClient.findByID(inputValue.inputLong("id"));
+        return workWearApiClient.findById(inputValue.inputLong("id"));
+    }
+
+    public WorkWear findById(Long id){
+        return workWearApiClient.findById(id);
     }
 
     public List<WorkWear> findAllWorkWearByModelWorkWear() {

@@ -41,8 +41,8 @@ public class WorkShoesController {
         workShoesApiClient.deleteWorkShoes(id);
     }
 
-    public WorkShoes findById() {
-        return workShoesApiClient.findById(inputValue.inputLong("id"));
+    public WorkShoes findById(Long id) {
+        return workShoesApiClient.findById(id);
     }
 
     public List<WorkShoes> findAllWorkShoesByWorkShoesSize() {
