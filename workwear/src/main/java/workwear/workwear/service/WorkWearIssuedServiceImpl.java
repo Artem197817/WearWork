@@ -3,6 +3,7 @@ package workwear.workwear.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import workwear.workwear.model.WorkWear;
 import workwear.workwear.model.WorkWearIssued;
 import workwear.workwear.model.WorkWearIssuedView;
@@ -80,6 +81,23 @@ public class WorkWearIssuedServiceImpl implements WorkWearIssuedService {
             workWearIssuedViewList.add(new WorkWearIssuedView(wwi,workWearService.findById(wwi.getWorkWearId())));
         }
         return workWearIssuedViewList;
+    }
+
+    @Override
+    public WorkWearIssued findWorkWearIssuedByWorkWearId(Long id) {
+        return workWearIssuedRepository.findWorkWearIssuedByWorkWearId(id);
+    }
+
+    @Override
+    @Transactional
+    public String returnWorkWearOnStorage(@PathVariable Long id){
+        WorkWearIssued workWearIssued = findWorkWearIssuedById(id);
+        WorkWear workWear = workWearService.findById(workWearIssued.getWorkWearId());
+        workWear.setWorkWearStatus(WorkWear.NOT_ISSUE);
+        workWearService.updateWorkWear(workWear);
+        workWearIssuedRepository.deleteById(id);
+        return  workWear.getWorkWearType().getValue() + " размер "
+                + workWear.getWorkWearSize().getValue() + " возвращен на склад";
     }
 }
 

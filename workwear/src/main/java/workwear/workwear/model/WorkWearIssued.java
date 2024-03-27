@@ -25,12 +25,6 @@ public class WorkWearIssued {
     private LocalDate dateIssued;
 
 
-    public WorkWearIssued(Long employeeId,Long workWearId,Integer monthPeriod){
-        this.employeeId = employeeId;
-        this.workWearId = workWearId;
-        this.replacementDate = LocalDate.now().plusMonths(monthPeriod);
-        this.dateIssued = LocalDate.now();
-    }
 
     @Override
     public String toString() {

@@ -8,6 +8,7 @@ import workwear.workwearclient.controller.WorkShoesController;
 import workwear.workwearclient.model.Employee;
 import workwear.workwearclient.model.WorkShoes;
 import workwear.workwearclient.model.WorkShoesIssued;
+import workwear.workwearclient.model.modelview.ShoesIssuedView;
 import workwear.workwearclient.view.input.InputValue;
 import workwear.workwearclient.view.output.Output;
 
@@ -50,6 +51,9 @@ public class WorkShoesIssuedService {
         return new WorkShoesIssued(employee.getId(), idWorkShoes, monthPeriod);
     }
 
+    public  WorkShoesIssued createWorkShoesIssue(ShoesIssuedView shoesIssuedView){
+        return new WorkShoesIssued(shoesIssuedView.getEmployeeId(),shoesIssuedView.getWorkShoesId(),shoesIssuedView.getMonthPeriod());
+    }
 }
 
 

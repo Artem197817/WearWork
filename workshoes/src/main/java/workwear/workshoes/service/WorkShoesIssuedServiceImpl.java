@@ -3,6 +3,7 @@ package workwear.workshoes.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import workwear.workshoes.model.WorkShoes;
 import workwear.workshoes.model.WorkShoesIssued;
 import workwear.workshoes.model.WorkShoesIssuedView;
@@ -67,6 +68,11 @@ public class WorkShoesIssuedServiceImpl implements WorkShoesIssuedService {
     }
 
     @Override
+    public WorkShoesIssued findWorkShoesIssuedByWorkShoesId(Long id) {
+        return workShoesIssuedRepository.findWorkShoesIssuedByWorkShoesId(id);
+    }
+
+    @Override
     public List<WorkShoesIssuedView> findWorkShoesIssuedEmployee(Long id) {
         List<WorkShoesIssued> workShoesIssuedList = findWorkShoesIssuedByEmployeeId(id);
         List<WorkShoesIssuedView> workShoesIssuedViewList = new ArrayList<>();
@@ -76,4 +82,17 @@ public class WorkShoesIssuedServiceImpl implements WorkShoesIssuedService {
         }
         return workShoesIssuedViewList;
     }
+
+    @Override
+    @Transactional
+    public String returnWorkShoesOnStorage(@PathVariable Long workShoesIssuedId) {
+        WorkShoesIssued workShoesIssued = findById(workShoesIssuedId);
+        WorkShoes workShoes = workShoesService.findById(workShoesIssued.getWorkShoesId());
+        workShoes.setWorkShoesStatus(WorkShoes.NOT_ISSUE);
+        workShoesService.updateWorkShoes(workShoes);
+        workShoesIssuedRepository.deleteById(workShoesIssued.getId());
+        return workShoes.getWorkShoesType().getValue() + " размер "
+                + workShoes.getWorkShoesSize() + " возвращен на склад";
+    }
+
 }

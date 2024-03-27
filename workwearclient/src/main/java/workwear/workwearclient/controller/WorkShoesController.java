@@ -37,6 +37,10 @@ public class WorkShoesController {
         workShoesApiClient.deleteWorkShoes(inputValue.inputLong("id"));
     }
 
+    public void deleteWorkShoes(Long id) {
+        workShoesApiClient.deleteWorkShoes(id);
+    }
+
     public WorkShoes findById() {
         return workShoesApiClient.findById(inputValue.inputLong("id"));
     }
@@ -45,15 +49,27 @@ public class WorkShoesController {
         return workShoesApiClient.findAllWorkShoesByWorkShoesSize(inputValue.inputInt("Размер"));
     }
 
+    public List<WorkShoes> findAllWorkShoesByWorkShoesSize(Integer size) {
+        return workShoesApiClient.findAllWorkShoesByWorkShoesSize(size);
+    }
+
     public List<WorkShoes> findAllWorkShoesByWorkShoesType() {
         WorkShoesType workShoesType = WorkShoesType.getType(inputValue.inputEnum("Тип обуви", WorkShoesType.class));
         return workShoesApiClient.findAllWorkShoesByWorkShoesType(workShoesType);
     }
 
+    public List<WorkShoes> findAllWorkShoesByWorkShoesType(WorkShoesType workShoesType){
+        return workShoesApiClient.findAllWorkShoesByWorkShoesType(workShoesType);
+    }
+
     public String saveWorkShoes(WorkShoesArrival workShoesArrival) {
-        if (workShoesArrival.getQuantity() < 0) {return "Заданы неверные данные";}
+        if (workShoesArrival.getQuantity() <= 0) {return "Заданы неверные данные";}
         workShoesApiClient.saveAllWorkShoes(workShoesService.createWorkShoes(workShoesArrival));
         return "Сохранено " + workShoesArrival.getWorkShoesType();
+    }
+
+    public void saveWorkShoes(WorkShoes workShoes){
+        workShoesApiClient.saveWorkShoes(workShoes);
     }
 }
 

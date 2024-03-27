@@ -1,23 +1,22 @@
 package workwear.workwear.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
-import workwear.workwear.model.WorkWear;
 import workwear.workwear.model.WorkWearIssued;
 import workwear.workwear.model.WorkWearIssuedView;
 import workwear.workwear.service.WorkWearIssuedService;
 import workwear.workwear.service.WorkWearService;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/work_wear_issued")
-@Data
+@AllArgsConstructor
 public class WorkWearIssuedController {
 
     private final WorkWearIssuedService workWearIssuedService;
-    private final WorkWearService workWearService;
+
     @GetMapping("work_wear_issued_all")
     public List<WorkWearIssued> findAllWorkWearIssued() {
         return workWearIssuedService.findAllWorkWearIssued();
@@ -30,7 +29,6 @@ public class WorkWearIssuedController {
 
     @PostMapping("save_work_wear_issued")
     public String saveWorkWearIssued(@RequestBody WorkWearIssued workWearIssued) {
-        System.out.println(workWearIssued);
         return workWearIssuedService.saveWorkWearIssued(workWearIssued);
     }
 
@@ -53,9 +51,15 @@ public class WorkWearIssuedController {
     public List<WorkWearIssued> findWorkWearIssuedToBeReplaced() {
         return workWearIssuedService.findWorkWearIssuedToBeReplaced();
     }
+
     @GetMapping("/work_wear_issued_employee_id/{id}")
-    public List<WorkWearIssuedView> findWorkWearIssuedEmployee(@PathVariable Long id){
+    public List<WorkWearIssuedView> findWorkWearIssuedEmployee(@PathVariable Long id) {
         return workWearIssuedService.findWorkWearIssuedEmployee(id);
+    }
+
+    @PutMapping("work_wear_return_storage/{id}")
+    public String returnWorkWearOnStorage(@PathVariable Long id) {
+        return workWearIssuedService.returnWorkWearOnStorage(id);
     }
 }
 

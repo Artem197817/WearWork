@@ -1,5 +1,6 @@
 package workwear.workshoes.service;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import workwear.workshoes.model.WorkShoesIssued;
 import workwear.workshoes.model.WorkShoesIssuedView;
 
@@ -23,4 +24,8 @@ public interface WorkShoesIssuedService {
     List<WorkShoesIssued> findWorkShoesToBeReplaced();
 
     List<WorkShoesIssuedView> findWorkShoesIssuedEmployee(Long id);
+
+    WorkShoesIssued findWorkShoesIssuedByWorkShoesId (Long id);
+
+    String returnWorkShoesOnStorage (Long id);
 }

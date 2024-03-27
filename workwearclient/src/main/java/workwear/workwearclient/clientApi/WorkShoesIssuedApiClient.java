@@ -33,4 +33,7 @@ public interface WorkShoesIssuedApiClient {
 
     @GetMapping("/work_shoes_issued_employee/{id}")
     List<WorkShoesIssuedView> findWorkShoesIssuedEmployee(@PathVariable Long id);
+
+    @PutMapping("/work_shoes_issued_return/{id}")
+    String returnWorkShoesOnStorage(@PathVariable Long id);
 }

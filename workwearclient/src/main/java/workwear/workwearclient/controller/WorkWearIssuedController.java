@@ -2,6 +2,8 @@ package workwear.workwearclient.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import workwear.workwearclient.clientApi.WorkWearIssuedApiClient;
 import workwear.workwearclient.model.WorkWearIssued;
 import workwear.workwearclient.model.modelview.WorkWearIssuedView;
@@ -25,6 +27,10 @@ public class WorkWearIssuedController {
     public void saveWorkWearIssued() {
         WorkWearIssued workWearIssued = workWearIssuedService.issuedWorkWear();
         if (workWearIssued == null) return;
+        workWearIssuedApiClient.saveWorkWearIssued(workWearIssued);
+    }
+
+    public void saveWorkWearIssued(WorkWearIssued workWearIssued){
         workWearIssuedApiClient.saveWorkWearIssued(workWearIssued);
     }
 
@@ -54,6 +60,11 @@ public class WorkWearIssuedController {
 
     public WorkWearIssued findWorkWearIssuedById(Long id) {
         return workWearIssuedApiClient.findWorkWearIssuedById(id);
+    }
+
+
+    public String returnWorkWearOnStorage(Long id){
+        return workWearIssuedApiClient.returnWorkWearOnStorage(id);
     }
 }
 

@@ -7,6 +7,7 @@ import workwear.workshoes.model.WorkShoes;
 import workwear.workshoes.model.enumerated.WorkShoesType;
 import workwear.workshoes.repository.WorkShoesRepository;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,9 @@ public class WorkShoesServiceImpl implements WorkShoesService{
 
     @Override
     public List<WorkShoes> findAllWorkShoes() {
-        return workShoesRepository.findAll();
+        return workShoesRepository.findAll().stream()
+                .sorted(Comparator.comparing(WorkShoes::getWorkShoesType))
+                .toList();
     }
 
     @Override
@@ -48,12 +51,16 @@ public class WorkShoesServiceImpl implements WorkShoesService{
 
     @Override
     public List<WorkShoes> findAllWorkShoesByWorkShoesSize(Integer workShoesSize) {
-        return workShoesRepository.findAllWorkShoesByWorkShoesSize(workShoesSize);
+        return workShoesRepository.findAllWorkShoesByWorkShoesSize(workShoesSize).stream()
+                .sorted(Comparator.comparing(WorkShoes::getWorkShoesType))
+                .toList();
     }
 
     @Override
     public List<WorkShoes> findAllWorkShoesByWorkShoesType(WorkShoesType workShoesType) {
-        return workShoesRepository.findAllWorkShoesByWorkShoesType(workShoesType);
+        return workShoesRepository.findAllWorkShoesByWorkShoesType(workShoesType).stream()
+                .sorted(Comparator.comparing(WorkShoes::getWorkShoesSize))
+                .toList();
     }
 
     @Override

@@ -34,8 +34,8 @@
                 <td th:text="${wear.workWearHeight}"></td>
                 <td th:text="${#temporals.format(wear.dateIssued, 'dd-MM-yyyy ')}"></td>
                 <td th:text="${#temporals.format(wear.replacementDate, 'dd-MM-yyyy ')}"></td>
-                <td><a th:href="@{delete/{id}(id=${wear.workWearIssuedId})}">Списать</a></td>
-                <td><a th:href="@{return/{id}(id=${wear.workWearIssuedId})}">Вернуть</a></td>
+                <td><a th:href="@{/employee/delete/{id}(id=${wear.workWearIssuedId})}">Списать</a></td>
+                <td><a th:href="@{/employee/return/{id}(id=${wear.workWearIssuedId})}">Вернуть</a></td>
             </tr>
         </tbody>
     </table>
@@ -59,12 +59,12 @@
                 <td th:text="${shoes.workShoesSize}"></td>
                 <td th:text="${#temporals.format(shoes.dateIssued, 'dd-MM-yyyy ')}"></td>
                 <td th:text="${#temporals.format(shoes.replacementDate, 'dd-MM-yyyy ')}"></td>
-                <td><a th:href="@{delete_shoes/{id}(id=${shoes.workShoesIssuedId})}">Списать</a></td>
-                <td><a th:href="@{return_shoes/{id}(id=${shoes.workShoesIssuedId})}">Вернуть</a></td>
+                <td><a th:href="@{/employee/delete_shoes/{id}(id=${shoes.workShoesIssuedId})}">Списать</a></td>
+                <td><a th:href="@{/employee/return_shoes/{id}(id=${shoes.workShoesIssuedId})}">Вернуть</a></td>
             </tr>
         </tbody>
     </table>
-    <form class="button_form" action="/" method="get">
+    <form class="button_form" action="/employee/search" method="get">
         <button class="button" type="submit">Вернуться</button>
     </form>
 

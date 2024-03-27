@@ -8,4 +8,6 @@ import java.util.List;
 public interface WorkWearIssuedRepository extends JpaRepository<WorkWearIssued, Long> {
 
     List<WorkWearIssued> findWorkWearIssuedByEmployeeId(Long id);
+
+    WorkWearIssued findWorkWearIssuedByWorkWearId(Long id);
 }

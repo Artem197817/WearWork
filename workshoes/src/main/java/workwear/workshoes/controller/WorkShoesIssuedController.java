@@ -1,18 +1,20 @@
 package workwear.workshoes.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 import workwear.workshoes.model.WorkShoes;
 import workwear.workshoes.model.WorkShoesIssued;
 import workwear.workshoes.model.WorkShoesIssuedView;
 import workwear.workshoes.service.WorkShoesIssuedService;
+import workwear.workshoes.service.WorkShoesService;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/work_shoes_issued")
-@Data
+@AllArgsConstructor
 public class WorkShoesIssuedController {
 
     private final WorkShoesIssuedService workShoesIssuedService;
@@ -55,5 +57,9 @@ public class WorkShoesIssuedController {
     @GetMapping("/work_shoes_issued_employee/{id}")
     public List<WorkShoesIssuedView> findWorkShoesIssuedEmployee (@PathVariable Long id){
         return workShoesIssuedService.findWorkShoesIssuedEmployee(id);
+    }
+    @PutMapping("/work_shoes_issued_return/{id}")
+    public String returnWorkShoesOnStorage(@PathVariable Long id){
+       return workShoesIssuedService.returnWorkShoesOnStorage(id);
     }
 }

@@ -38,10 +38,10 @@
                 <td th:text="${employee.productionDivision}"></td>
                 <td th:text="${employee.company}"></td>
                 <td th:text="${employee.specialization}"></td>
-                <td><a th:href="@{employee_update/{id}(id=${employee.id})}">Редактировать</a></td>
-                <td><a th:href="@{employee_delete/{id}(id=${employee.id})}">Удалить</a></td>
-                <td><a th:href="@{employee_issue/{id}(id=${employee.id})}">Выдано</a></td>
-                <td><a th:href="@{issue/{id}(id=${employee.id})}">Выдать</a></td>
+                <td><a th:href="@{/employee/employee_update/{id}(id=${employee.id})}">Редактировать</a></td>
+                <td><a th:href="@{/employee/employee_delete/{id}(id=${employee.id})}">Удалить</a></td>
+                <td><a th:href="@{/employee/employee_issue/{id}(id=${employee.id})}">Выдано</a></td>
+                <td><a th:href="@{/employee/issue/{id}(id=${employee.id})}">Выдать</a></td>
             </tr>
         </tbody>
     </table>

@@ -8,6 +8,7 @@ import workwear.workwearclient.model.Employee;
 import workwear.workwearclient.model.WorkWear;
 import workwear.workwearclient.model.WorkWearIssued;
 import workwear.workwearclient.model.modelEnum.WorkWearSize;
+import workwear.workwearclient.model.modelview.WearIssuedView;
 import workwear.workwearclient.view.input.InputValue;
 import workwear.workwearclient.view.output.Output;
 
@@ -48,6 +49,10 @@ public class WorkWearIssueService {
         }
         Integer wearPeriod = inputValue.inputInt("Введите срок выдачи спецодежды в месяцах");
         return new WorkWearIssued(employee.getId(), idWorkWear, wearPeriod);
+    }
+
+    public WorkWearIssued createWorkWearIssued(WearIssuedView wearIssuedView){
+        return new WorkWearIssued(wearIssuedView.getEmployeeId(),wearIssuedView.getWorkWearId(),wearIssuedView.getMonthPeriod());
     }
 
 }

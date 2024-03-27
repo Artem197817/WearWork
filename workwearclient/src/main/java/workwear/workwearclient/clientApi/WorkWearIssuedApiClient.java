@@ -33,4 +33,7 @@ public interface WorkWearIssuedApiClient {
 
     @GetMapping("/work_wear_issued_employee_id/{id}")
     List<WorkWearIssuedView> findWorkWearIssuedEmployee(@PathVariable Long id);
+
+    @PutMapping("work_wear_return_storage/{id}")
+    String returnWorkWearOnStorage(@PathVariable Long id);
 }

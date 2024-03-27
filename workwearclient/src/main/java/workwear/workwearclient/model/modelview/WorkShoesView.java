@@ -1,10 +1,12 @@
 package workwear.workwearclient.model.modelview;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import workwear.workwearclient.model.WorkShoes;
 
 
 @Data
+@NoArgsConstructor
 public class WorkShoesView {
 
     private Long id;

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import workwear.workwearclient.controller.WorkWearController;
+import workwear.workwearclient.model.WorkWear;
 import workwear.workwearclient.model.modelEnum.*;
 import workwear.workwearclient.model.modelview.WorkWearArrival;
 import workwear.workwearclient.model.modelview.WorkWearView;
@@ -63,7 +64,8 @@ public class WorkWearControllerWeb {
     @GetMapping("/search/all")
     public String searchAll(Model model) {
         model.addAttribute("status", "all");
-        List<WorkWearView> workWearViewList = workWearService.createWorkWearView(workWearController.findAllWorkWear());
+        List<WorkWear> workWearList = workWearService.sortedWorkWearNotIssue(workWearController.findAllWorkWear());
+        List<WorkWearView> workWearViewList = workWearService.createWorkWearView(workWearList);
         model.addAttribute("workWearViewList", workWearViewList);
         return "workwear_list";
     }
@@ -71,17 +73,19 @@ public class WorkWearControllerWeb {
     @GetMapping("/search/type")
     public String searchType(String workWearType, Model model) {
         WorkWearType workWearTyp = WorkWearType.getType(workWearType);
-        List<WorkWearView> workWearViewList = workWearService.createWorkWearView(workWearController
-                .findAllWorkWearByWorkWearType(workWearTyp));
+        List<WorkWear> workWearList = workWearService.sortedWorkWearNotIssue(workWearController.findAllWorkWearByWorkWearType(workWearTyp));
+        List<WorkWearView> workWearViewList = workWearService.createWorkWearView(workWearList);
         model.addAttribute("workWearViewList", workWearViewList);
         return "workwear_list";
     }
+
     @GetMapping("/search/size")
-    public String searchSize(String workWearSize, Model model){
+    public String searchSize(String workWearSize, Model model) {
         WorkWearSize wearSize = WorkWearSize.getType(workWearSize);
-        List<WorkWearView> workWearViewList = workWearService.createWorkWearView(workWearController
-                .findAllWorkWearByWorkWearSize(wearSize));
-        model.addAttribute("workWearViewList",workWearViewList);
+        List<WorkWear> workWearList = workWearService.sortedWorkWearNotIssue(workWearController.findAllWorkWearByWorkWearSize(wearSize));
+        List<WorkWearView> workWearViewList = workWearService.createWorkWearView(workWearList);
+        model.addAttribute("workWearViewList", workWearViewList);
         return "workwear_list";
     }
+
 }

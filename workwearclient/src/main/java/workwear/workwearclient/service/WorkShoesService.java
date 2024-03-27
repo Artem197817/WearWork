@@ -50,4 +50,12 @@ public class WorkShoesService {
                 .map(WorkShoesView::new)
                 .toList();
     }
+
+    public List<Integer> createSizeList(){
+        List<Integer> workShoesSizeList = new ArrayList<>();
+        for (int i = 34; i <49 ; i++) {
+            workShoesSizeList.add(i);
+        }
+        return workShoesSizeList;
+    }
 }

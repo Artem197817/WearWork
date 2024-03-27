@@ -31,10 +31,4 @@ public class WorkShoes {
 
     private int workShoesStatus = NOT_ISSUE;
 
-    public WorkShoes(String modelWorkShoes, String workShoesSize, WorkShoesType workShoesType) {
-        this.modelWorkShoes = modelWorkShoes;
-        this.workShoesSize = Integer.parseInt(workShoesSize);
-        this.workShoesType = workShoesType;
-
-    }
 }

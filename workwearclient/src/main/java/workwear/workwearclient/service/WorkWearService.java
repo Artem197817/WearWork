@@ -50,6 +50,7 @@ public class WorkWearService {
 
     public List<WorkWearView> createWorkWearView(List<WorkWear> workWearList){
         return workWearList.stream()
+                .sorted(Comparator.comparing(w -> w.getWorkWearSize().getValue()))
                 .map(WorkWearView::new)
                 .toList();
     }
