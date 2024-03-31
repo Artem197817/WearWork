@@ -1,6 +1,7 @@
 package workwear.workwear.service;
 
 import workwear.workwear.model.WorkWear;
+import workwear.workwear.model.WorkWearOrder;
 import workwear.workwear.model.enumerated.WorkWearSize;
 import workwear.workwear.model.enumerated.WorkWearType;
 
@@ -25,4 +26,5 @@ public interface WorkWearService {
     List<WorkWear> findAllWorkWearByWorkWearType(WorkWearType workWearType);
 
     List<WorkWear> findAllWorkWearByWorkWearSize(WorkWearSize workWearSize);
+
 }

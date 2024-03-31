@@ -23,8 +23,16 @@ public class WorkShoesTotalController {
         return workShoesTotalApiClient.findWorkShoesByTypeSortedNumber(workShoesType);
     }
 
+    public List<WorkShoesTotal> findWorkShoesByTypeSortedNumber(WorkShoesType workShoesType){
+        return workShoesTotalApiClient.findWorkShoesByTypeSortedNumber(workShoesType);
+    }
+
     public List<WorkShoesTotal> findWorkShoesBySizeSortedNumber() {
         return workShoesTotalApiClient.findWorkShoesBySizeSortedNumber(inputValue.inputInt("Размер"));
+    }
+
+    public List<WorkShoesTotal> findWorkShoesBySizeSortedNumber(Integer size){
+        return workShoesTotalApiClient.findWorkShoesBySizeSortedNumber(size);
     }
 
     public List<WorkShoesTotal> findAllWorkShoesSortedNumber() {

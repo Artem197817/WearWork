@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/styles/employee_create.css}" rel="stylesheet" />
+    <title>Work Wear</title>
+</head>
+
+<body>
+    <div class="header">
+        <p>Рабочая одежда поиск</p>
+        <p class="p"><span th:text="${message}"></span></p>
+    </div>
+    <div class="content">
+        <form class="form" action="#" th:action="@{/reserve/workwear/type}" th:object="${workWearType}"
+            th:value="${quantity}" method="get">
+          
+            <div class="input">
+                <label for="workWearType">Тип спецодежды</label>
+                <select class="form-control" id="workWearType" name="workWearType">
+                    <option value="0">выберите тип</option>
+                    <option th:each="workWearType : ${workWearTypeList}" th:value="${workWearType}"
+                        th:text="${workWearType}">
+                    </option>
+                </select>
+            </div>
+            
+            <div class="input">
+                <button class="button" type="submit" th:value="${workWearType}" value="Create workWear">По типу</button>
+            </div>
+        </form>
+        <form class="form" action="#" th:action="@{/reserve/workwear/size}" th:object="${workWearSize}"
+        th:value="${quantity}" method="get">
+
+        <div class="input">
+            <label for="workWearSize">Размер спецодежды</label>
+            <select class="form-control" id="workWearSize" name="workWearSize">
+                <option>выберите размер</option>
+                <option th:each="workWearSize : ${workWearSizeList}" th:value="${workWearSize}"
+                    th:text="${workWearSize}">
+                </option>
+            </select>
+        </div>
+
+        <div class="input">
+            <button class="button" type="submit" th:value="${workWearSize}" value="Create workWear">По размеру</button>
+        </div>
+
+    </form>
+    </div>
+
+    <form class="button_form" action="/reserve/workwear" method="get">
+        <button class="button" type="submit">Вернуться</button>
+    </form>
+
+
+</body>
+
+</html>

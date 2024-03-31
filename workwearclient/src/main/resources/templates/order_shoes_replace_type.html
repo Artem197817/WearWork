@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/styles/employee_create.css}" rel="stylesheet" />
+    <title>Work Wear</title>
+</head>
+
+<body>
+    <div class="header">
+        <p>Рабочая обувь поиск</p>
+        <p class="p"><span th:text="${message}"></span></p>
+    </div>
+    <div class="content">
+        <form class="form" action="#" th:action="@{/order/workshoes/type/replace}" th:object="${workShoesType}"
+           method="get">
+          
+            <div class="input">
+                <label for="workShoesType">Тип обуви</label>
+                <select class="form-control" id="workShoesType" name="workShoesType">
+                    <option value="0">выберите тип</option>
+                    <option th:each="workShoesType : ${workShoesTypeList}" th:value="${workShoesType}"
+                        th:text="${workShoesType}">
+                    </option>
+                </select>
+            </div>
+            
+            <div class="input">
+                <button class="button" type="submit" th:value="${workShoesType}" value="Create">По типу</button>
+            </div>
+        </form>
+    </div>
+
+    <form class="button_form" action="/order/workshoes/replace" method="get">
+        <button class="button" type="submit">Вернуться</button>
+    </form>
+
+
+</body>
+
+</html>

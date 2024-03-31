@@ -10,7 +10,7 @@
 
 <body>
     <div class="header">
-        <p>Запасы обувь</p>
+        <p>Заказать размеры</p>
         <p><span th:text="${message}"></span></p>
     </div>
     <table>
@@ -18,18 +18,18 @@
             <tr>
                 <th class="type">Тип</th>
                 <th>Размер</th>
-                <th>Количество</th>
+                <th>Рост</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="workshoes : ${workShoesTotalViewList}">
-                <td class="type" th:text="${workshoes.workShoesType}"></td>
-                <td th:text="${workshoes.workShoesSize}"></td>
-                <td th:text="${workshoes.number}"></td>
+            <tr th:each="workwear : ${workWearOrderViewList}">
+                <td class="type" th:text="${workwear.workWearType}"></td>
+                <td th:text="${workwear.workWearSize}"></td>
+                <td th:text="${workwear.workWearHeight}"></td>
         </tbody>
     </table>
 
-    <form class="button_form" action="/reserve/shoes_param" method="get">
+    <form class="button_form" action="/order/workwear/deficit" method="get">
         <button class="button" type="submit">Вернуться</button>
     </form>
 

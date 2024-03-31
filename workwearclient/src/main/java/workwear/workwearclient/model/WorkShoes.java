@@ -12,6 +12,9 @@ public class WorkShoes {
     public static final int ISSUE = -1;
     public static final int NOT_ISSUE = 1;
 
+    public static final int MIN_SIZE = 34;
+    public static final int MAX_SIZE = 48;
+
     private Long id;
     private String modelWorkShoes;
     private int workShoesSize;

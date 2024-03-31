@@ -10,37 +10,29 @@
 
 <body>
     <div class="header">
-        <p>Рабочая обувь</p>
+        <p>Скоро замена</p>
         <p><span th:text="${message}"></span></p>
     </div>
     <table>
         <thead>
             <tr>
-                <th>id</th>
-                <th>Модель</th>
                 <th class="type">Тип</th>
                 <th>Размер</th>
-                <th>Редактировать</th>
-                <th>Удалить</th>
+                <th>Количество</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="workshoes : ${workShoesViewList}">
-                <td th:text="${workshoes.id}"></td>
-                <td th:text="${workshoes.modelWorkShoes}"></td>
+            <tr th:each="workshoes : ${workShoesTotalViewList}">
                 <td class="type" th:text="${workshoes.workShoesType}"></td>
                 <td th:text="${workshoes.workShoesSize}"></td>
-                <td><a th:href="@{/workshoes/workshoes_update/{id}(id=${workshoes.id})}">Редактировать</a></td>
-                <td><a th:href="@{/workshoes/workshoes_delete/{id}(id=${workshoes.id})}">Удалить</a></td>
-            </tr>
+                <td th:text="${workshoes.number}"></td>
         </tbody>
     </table>
 
-    <form class="button_form" action="/workshoes/search/param" method="get">
+    <form class="button_form" action="/order/workshoes/replace" method="get">
         <button class="button" type="submit">Вернуться</button>
     </form>
-    <link th:value="${status}">
-    </link>
+
 </body>
 
 </html>

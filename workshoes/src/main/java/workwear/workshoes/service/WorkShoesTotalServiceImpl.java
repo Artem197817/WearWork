@@ -17,10 +17,17 @@ public class WorkShoesTotalServiceImpl implements WorkShoesTotalService {
 
     private final WorkShoesRepository workShoesRepository;
 
+
     @Override
     public List<WorkShoesTotal> findWorkShoesByTypeSortedNumber(WorkShoesType workShoesType) {
-        int number = 0;
         List<WorkShoes> workShoesList = sortedWorkShoesNotIssued(workShoesRepository.findAllWorkShoesByWorkShoesType(workShoesType));
+        return typeSortedNumber(workShoesList, workShoesType);
+    }
+
+    @Override
+    public List<WorkShoesTotal> typeSortedNumber(List<WorkShoes> workShoesList, WorkShoesType workShoesType) {
+        if (workShoesList.isEmpty()) return new ArrayList<>();
+        int number = 0;
         List<WorkShoesTotal> workShoesTotals = new ArrayList<>();
         List<WorkShoes> workShoesFilterSize = workShoesList.stream()
                 .sorted(Comparator.comparing(WorkShoes::getWorkShoesSize))
@@ -65,9 +72,16 @@ public class WorkShoesTotalServiceImpl implements WorkShoesTotalService {
         return workShoesTotals;
     }
 
+
     @Override
     public List<WorkShoesTotal> findAllWorkShoesSortedNumber() {
         List<WorkShoes> workShoesList = sortedWorkShoesNotIssued(workShoesRepository.findAll());
+        return sortedNumber(workShoesList);
+    }
+
+    @Override
+    public List<WorkShoesTotal> sortedNumber(List<WorkShoes> workShoesList) {
+        if (workShoesList.isEmpty()) return new ArrayList<>();
         List<WorkShoesTotal> workShoesTotals = new ArrayList<>();
         Set<WorkShoesType> workShoesTypeSet = new HashSet<>();
         for (WorkShoes workShoes : workShoesList)

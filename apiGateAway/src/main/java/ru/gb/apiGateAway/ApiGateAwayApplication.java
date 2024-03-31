@@ -22,6 +22,8 @@ public class ApiGateAwayApplication {
                         .uri("http://localhost:8082/"))
                 .route("Payment", r -> r.path("/work_wear_total/**")
                         .uri("http://localhost:8082/"))
+                .route("Payment", r -> r.path("/work_wear_order/**")
+                        .uri("http://localhost:8082/"))
                 .route("Payment", r -> r.path("/employee/**")
                         .uri("http://localhost:8081/"))
                 .route("Warehouse", r -> r.path("/work_shoes/**")
@@ -29,6 +31,8 @@ public class ApiGateAwayApplication {
                 .route("Warehouse", r -> r.path("/work_shoes_issued/**")
                         .uri("http://localhost:8083/"))
                 .route("Warehouse", r -> r.path("/work_shoes_total/**")
+                        .uri("http://localhost:8083/"))
+                .route("Warehouse", r -> r.path("/work_shoes_order/**")
                         .uri("http://localhost:8083/"))
                 .build();
     }

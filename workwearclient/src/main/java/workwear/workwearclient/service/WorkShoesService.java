@@ -53,7 +53,7 @@ public class WorkShoesService {
 
     public List<Integer> createSizeList(){
         List<Integer> workShoesSizeList = new ArrayList<>();
-        for (int i = 34; i <49 ; i++) {
+        for (int i = WorkShoes.MIN_SIZE; i <= WorkShoes.MAX_SIZE ; i++) {
             workShoesSizeList.add(i);
         }
         return workShoesSizeList;

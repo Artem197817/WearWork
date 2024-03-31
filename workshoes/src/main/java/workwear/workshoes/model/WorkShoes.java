@@ -18,14 +18,16 @@ public class WorkShoes {
 
     public static final int ISSUE = -1;
     public static final int NOT_ISSUE = 1;
+    public static final int MIN_SIZE = 34;
+    public static final int MAX_SIZE = 48;
 
     @Id
     @GeneratedValue
     private Long id;
     private String modelWorkShoes;
 
-    @Min(34)
-    @Max(48)
+    @Min(MIN_SIZE)
+    @Max(MAX_SIZE)
     private int workShoesSize;
     private WorkShoesType workShoesType;
 

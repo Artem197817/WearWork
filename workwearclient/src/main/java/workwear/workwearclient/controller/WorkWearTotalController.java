@@ -10,6 +10,7 @@ import workwear.workwearclient.view.input.InputValue;
 
 import java.util.List;
 
+
 @Controller
 @AllArgsConstructor
 public class WorkWearTotalController {
@@ -22,8 +23,16 @@ public class WorkWearTotalController {
         return workWearTotalApiClient.findWorkWearByTypeSortedNumber(workWearType);
     }
 
+    public List<WorkWearTotal> findWorkWearByTypeSortedNumber(WorkWearType workWearType){
+        return workWearTotalApiClient.findWorkWearByTypeSortedNumber(workWearType);
+    }
+
     public List<WorkWearTotal> findWorkWearBySizeSortedNumber() {
         WorkWearSize workWearSize = WorkWearSize.getType(inputValue.inputEnum("Размер",WorkWearSize.class));
+        return workWearTotalApiClient.findWorkWearBySizeSortedNumber(workWearSize);
+    }
+
+    public List<WorkWearTotal> findWorkWearBySizeSortedNumber(WorkWearSize workWearSize){
         return workWearTotalApiClient.findWorkWearBySizeSortedNumber(workWearSize);
     }
 

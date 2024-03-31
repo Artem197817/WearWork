@@ -4,10 +4,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import workwear.workwear.model.WorkWear;
+import workwear.workwear.model.WorkWearOrder;
+import workwear.workwear.model.enumerated.WorkWearHeight;
 import workwear.workwear.model.enumerated.WorkWearSize;
 import workwear.workwear.model.enumerated.WorkWearType;
 import workwear.workwear.repository.WorkWearRepository;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +18,7 @@ import java.util.Optional;
 @Service
 @Transactional(readOnly = true)
 @AllArgsConstructor
-public class WorkWearServiceImpl implements WorkWearService{
+public class WorkWearServiceImpl implements WorkWearService {
 
     private final WorkWearRepository workWearRepository;
 
@@ -29,14 +32,16 @@ public class WorkWearServiceImpl implements WorkWearService{
     public void saveWorkWear(WorkWear workWear) {
         workWearRepository.save(workWear);
     }
+
     @Override
     @Transactional
-    public List<WorkWear> saveAllWorkWear(List<WorkWear> workWearList){
+    public List<WorkWear> saveAllWorkWear(List<WorkWear> workWearList) {
         return workWearRepository.saveAll(workWearList).stream()
                 .sorted(Comparator.comparing(WorkWear::getWorkWearType))
                 .sorted(Comparator.comparing(WorkWear::getWorkWearSize))
                 .toList();
     }
+
     @Override
     public WorkWear findById(Long id) {
         Optional<WorkWear> workWear = workWearRepository.findById(id);
@@ -75,4 +80,5 @@ public class WorkWearServiceImpl implements WorkWearService{
                 .sorted(Comparator.comparing(WorkWear::getWorkWearType))
                 .toList();
     }
+
 }
