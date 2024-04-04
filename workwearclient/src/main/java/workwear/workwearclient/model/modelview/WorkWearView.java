@@ -3,9 +3,7 @@ package workwear.workwearclient.model.modelview;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import workwear.workwearclient.model.WorkWear;
-import workwear.workwearclient.model.modelEnum.WorkWearHeight;
-import workwear.workwearclient.model.modelEnum.WorkWearSize;
-import workwear.workwearclient.model.modelEnum.WorkWearType;
+
 
 @Data
 @NoArgsConstructor

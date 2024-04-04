@@ -96,10 +96,10 @@ public class IssueControllerWeb {
     @GetMapping("/shoes/type")
     public String issueListShoes(@RequestParam Long id, @RequestParam String workShoesType, Model model) {
         model.addAttribute("id", id);
-         WorkShoesType workShoesType1 = WorkShoesType.getType(workShoesType);
-         List<WorkShoes> workShoesList = workShoesService.sortedWorkShoesNotIssue(workShoesController
-                 .findAllWorkShoesByWorkShoesType(workShoesType1));
-      List<WorkShoesView>  workShoesViewList = workShoesService.createShoesView(workShoesList);
+        WorkShoesType workShoesType1 = WorkShoesType.getType(workShoesType);
+        List<WorkShoes> workShoesList = workShoesService.sortedWorkShoesNotIssue(workShoesController
+                .findAllWorkShoesByWorkShoesType(workShoesType1));
+        List<WorkShoesView> workShoesViewList = workShoesService.createShoesView(workShoesList);
         model.addAttribute("workShoesViewList", workShoesViewList);
         return "issue_shoes_list";
     }
@@ -119,7 +119,7 @@ public class IssueControllerWeb {
             return "redirect:/issue/shoes/" + shoesIssuedView.getWorkShoesId() + shoesIssuedView.getEmployeeId();
         }
         WorkShoesIssued workShoesIssued = workShoesIssuedService.createWorkShoesIssue(shoesIssuedView);
-      workShoesIssuedController.saveWorkShoesIssued(workShoesIssued);
+        workShoesIssuedController.saveWorkShoesIssued(workShoesIssued);
         return "redirect:/employee/employee_issue/" + shoesIssuedView.getEmployeeId();
     }
 }

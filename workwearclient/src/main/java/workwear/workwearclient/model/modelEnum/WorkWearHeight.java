@@ -28,15 +28,6 @@ public enum WorkWearHeight {
         }
         return UNKNOWN;
     }
-    public static String[] getTypeArray() {
-
-        String[] valuesShoes = new String[values().length];
-        int i = 0;
-        for (WorkWearHeight w : values()) {
-            valuesShoes[i++] = w.getValue();
-        }
-        return valuesShoes;
-    }
 
     public static List<WorkWearHeight> getValues (){
         return List.of(values());

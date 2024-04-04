@@ -89,7 +89,7 @@ public class WorkWearControllerWeb {
     }
 
     @GetMapping("/workwear_update/{id}")
-    public String updateWorkWear(WorkWear workWear, Long id, Model model){
+    public String updateWorkWear(WorkWear workWear, Long id, Model model) {
         List<WorkWearType> workWearTypeList = WorkWearType.getValues();
         model.addAttribute("workWearTypeList", workWearTypeList);
         List<WorkWearSize> workWearSizeList = WorkWearSize.getValues();
@@ -100,13 +100,14 @@ public class WorkWearControllerWeb {
     }
 
     @PostMapping("/update")
-    public String update(WorkWear workWear){
+    public String update(WorkWear workWear) {
         workWearController.saveWorkWear(workWear);
         String path = URLEncoder.encode(workWear.getWorkWearType().getValue(), StandardCharsets.UTF_8);
         return "redirect:/workwear/search/type?workWearType=" + path;
     }
+
     @GetMapping("/workwear_delete/{id}")
-    public String deleteWorkWear(@PathVariable Long id){
+    public String deleteWorkWear(@PathVariable Long id) {
         String type = workWearController.findById(id).getWorkWearType().getValue();
         String path = URLEncoder.encode(type, StandardCharsets.UTF_8);
         workWearController.deleteWorkWear(id);

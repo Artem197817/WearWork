@@ -1,7 +1,7 @@
 package workwear.workwearclient.model.modelview;
 
 import lombok.Data;
-import workwear.workwearclient.model.modelEnum.WorkShoesType;
+
 
 @Data
 public class WorkShoesArrival {

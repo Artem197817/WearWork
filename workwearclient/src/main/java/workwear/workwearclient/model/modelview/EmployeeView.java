@@ -2,8 +2,6 @@ package workwear.workwearclient.model.modelview;
 
 import lombok.Data;
 import workwear.workwearclient.model.Employee;
-import workwear.workwearclient.model.modelEnum.Company;
-import workwear.workwearclient.model.modelEnum.ProductionDivision;
 
 @Data
 public class EmployeeView {

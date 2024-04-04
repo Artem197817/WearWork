@@ -9,7 +9,7 @@ import workwear.workwearclient.model.modelEnum.WorkWearSize;
 import workwear.workwearclient.model.modelEnum.WorkWearType;
 import workwear.workwearclient.model.modelview.WorkWearArrival;
 import workwear.workwearclient.service.WorkWearService;
-import workwear.workwearclient.view.input.InputValue;
+
 
 import java.util.List;
 
@@ -20,16 +20,11 @@ public class WorkWearController {
 
     private final WorkWearApiClient workWearApiClient;
     private final WorkWearService workWearService;
-    private final InputValue inputValue;
+
 
 
     public List<WorkWear> findAllWorkWear() {
         return workWearApiClient.findAllWorkWear();
-    }
-
-    public void saveAllNewWorkWear() {
-        List<WorkWear> workWearList = workWearService.createNewWorkWear();
-        workWearApiClient.saveAllWorkWear(workWearList);
     }
 
     public void saveWorkWear(WorkWear workWear) {
@@ -46,23 +41,10 @@ public class WorkWearController {
         workWearApiClient.deleteWorkWear(id);
     }
 
-
-    public WorkWear findById() {
-        return workWearApiClient.findById(inputValue.inputLong("id"));
-    }
-
     public WorkWear findById(Long id){
         return workWearApiClient.findById(id);
     }
 
-    public List<WorkWear> findAllWorkWearByModelWorkWear() {
-        return workWearApiClient.findAllWorkWearByModelWorkWear(inputValue.input("Модель"));
-    }
-
-    public List<WorkWear> findAllWorkWearByWorkWearType() {
-        WorkWearType workWearType = WorkWearType.getType(inputValue.inputEnum("Тип спецодежды", WorkWearType.class));
-        return workWearApiClient.findAllWorkWearByWorkWearType(workWearType);
-    }
     public List<WorkWear> findAllWorkWearByWorkWearType(WorkWearType workWearType){
         return workWearApiClient.findAllWorkWearByWorkWearType(workWearType);
     }

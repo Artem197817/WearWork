@@ -3,7 +3,6 @@ package workwear.workwearclient.model.modelEnum;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -27,15 +26,6 @@ public enum Company {
                 return c;
         }
         return NONE;
-    }
-    public static String[] getTypeArray() {
-
-        String[] valuesShoes = new String[values().length];
-        int i = 0;
-        for (Company w : values()) {
-            valuesShoes[i++] = w.getValue();
-        }
-        return valuesShoes;
     }
 
     public static List<Company> getValues(){

@@ -127,34 +127,35 @@ public class EmployeeControllerWeb {
     }
 
     @GetMapping("/return/{id}")
-    public String returnStorageWear (@PathVariable Long id, Model model) {
+    public String returnStorageWear(@PathVariable Long id, Model model) {
         WorkWearIssued workWearIssued = workWearIssuedController.findWorkWearIssuedById(id);
         workWearIssuedController.returnWorkWearOnStorage(id);
         return "redirect:/employee/employee_issue/" + workWearIssued.getEmployeeId();
     }
 
     @GetMapping("/return_shoes/{id}")
-    public String returnStorageShoes (@PathVariable Long id, Model model) {
+    public String returnStorageShoes(@PathVariable Long id, Model model) {
         WorkShoesIssued workShoesIssued = workShoesIssuedController.findById(id);
         workShoesIssuedController.returnWorkShoesOnStorage(id);
         return "redirect:/employee/employee_issue/" + workShoesIssued.getEmployeeId();
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteEmployeeWear (@PathVariable Long id){
+    public String deleteEmployeeWear(@PathVariable Long id) {
         WorkWearIssued workWearIssued = workWearIssuedController.findWorkWearIssuedById(id);
         workWearIssuedController.deleteWorkWearIssued(id);
         return "redirect:/employee/employee_issue/" + workWearIssued.getEmployeeId();
     }
 
     @GetMapping("/delete_shoes/{id}")
-    public String deleteEmployeeShoes (@PathVariable Long id){
+    public String deleteEmployeeShoes(@PathVariable Long id) {
         WorkShoesIssued workShoesIssued = workShoesIssuedController.findById(id);
         workShoesIssuedController.deleteWorkShoesIssued(id);
         return "redirect:/employee/employee_issue/" + workShoesIssued.getEmployeeId();
     }
+
     @GetMapping("/issue/{id}")
-    public ModelAndView issue(@PathVariable Long id){
+    public ModelAndView issue(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("issue");
         modelAndView.getModelMap().addAttribute("id", id);
         issueControllerWeb.issue(modelAndView);

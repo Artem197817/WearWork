@@ -62,7 +62,7 @@ public class WorkWearTotalServiceImpl implements WorkWearTotalService {
         List<WorkWear> workWearList = sortedWorkWearNotIssued(workWearService.findAllWorkWearByWorkWearSize(workWearSize));
         return sizeSortedNumber(workWearList, workWearSize);
     }
-    private List<WorkWearTotal> sizeSortedNumber(List<WorkWear> workWearList, WorkWearSize workWearSize) {
+    public List<WorkWearTotal> sizeSortedNumber(List<WorkWear> workWearList, WorkWearSize workWearSize) {
         int number = 0;
         List<WorkWearTotal> workWearTotalList = new ArrayList<>();
         Set<WorkWearType> workWearTypeSet = new HashSet<>();

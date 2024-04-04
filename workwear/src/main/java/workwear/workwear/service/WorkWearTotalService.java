@@ -17,4 +17,5 @@ public interface WorkWearTotalService {
     List<WorkWearTotal> sortedNumber(List<WorkWear> workWearList);
 
     List<WorkWearTotal> typeSortedNumber(List<WorkWear> workWearList, WorkWearType workWearType);
+    List<WorkWearTotal> sizeSortedNumber(List<WorkWear> workWearList, WorkWearSize workWearSize);
 }

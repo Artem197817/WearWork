@@ -24,6 +24,7 @@ public class ClientControllerWeb {
     public String workWear() {
         return "workwear";
     }
+
     @GetMapping("workshoes")
     public String workShoes() {
         return "workshoes";

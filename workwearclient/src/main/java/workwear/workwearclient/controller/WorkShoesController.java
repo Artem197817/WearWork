@@ -8,7 +8,6 @@ import workwear.workwearclient.model.WorkShoes;
 import workwear.workwearclient.model.modelEnum.WorkShoesType;
 import workwear.workwearclient.model.modelview.WorkShoesArrival;
 import workwear.workwearclient.service.WorkShoesService;
-import workwear.workwearclient.view.input.InputValue;
 
 
 import java.util.List;
@@ -18,23 +17,12 @@ import java.util.List;
 @AllArgsConstructor
 public class WorkShoesController {
 
-
-    private final InputValue inputValue;
     private final WorkShoesService workShoesService;
     private final WorkShoesApiClient workShoesApiClient;
 
 
     public List<WorkShoes> findAllWorkShoes() {
         return workShoesApiClient.findAllWorkShoes();
-    }
-
-    public void saveNewWorkShoes() {
-        List<WorkShoes> workShoesList = workShoesService.createNewWorkShoes();
-        workShoesApiClient.saveAllWorkShoes(workShoesList);
-    }
-
-    public void deleteWorkShoes() {
-        workShoesApiClient.deleteWorkShoes(inputValue.inputLong("id"));
     }
 
     public void deleteWorkShoes(Long id) {
@@ -45,17 +33,8 @@ public class WorkShoesController {
         return workShoesApiClient.findById(id);
     }
 
-    public List<WorkShoes> findAllWorkShoesByWorkShoesSize() {
-        return workShoesApiClient.findAllWorkShoesByWorkShoesSize(inputValue.inputInt("Размер"));
-    }
-
     public List<WorkShoes> findAllWorkShoesByWorkShoesSize(Integer size) {
         return workShoesApiClient.findAllWorkShoesByWorkShoesSize(size);
-    }
-
-    public List<WorkShoes> findAllWorkShoesByWorkShoesType() {
-        WorkShoesType workShoesType = WorkShoesType.getType(inputValue.inputEnum("Тип обуви", WorkShoesType.class));
-        return workShoesApiClient.findAllWorkShoesByWorkShoesType(workShoesType);
     }
 
     public List<WorkShoes> findAllWorkShoesByWorkShoesType(WorkShoesType workShoesType){
