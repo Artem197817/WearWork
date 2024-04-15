@@ -17,13 +17,20 @@ public class WorkShoesTotalServiceImpl implements WorkShoesTotalService {
 
     private final WorkShoesRepository workShoesRepository;
 
-
+    /**
+     метод находит рабочую обувь определенного типа, сортирует их по количеству и возвращает список WorkShoesTotal.
+     Использует методы sortedWorkShoesNotIssued и typeSortedNumber.
+     */
     @Override
     public List<WorkShoesTotal> findWorkShoesByTypeSortedNumber(WorkShoesType workShoesType) {
         List<WorkShoes> workShoesList = sortedWorkShoesNotIssued(workShoesRepository.findAllWorkShoesByWorkShoesType(workShoesType));
         return typeSortedNumber(workShoesList, workShoesType);
     }
 
+    /**
+     метод сортирует рабочую обувь по размеру и подсчитывает количество каждого размера, создавая объекты WorkShoesTotal.
+     Возвращает список WorkShoesTotal.
+     */
     @Override
     public List<WorkShoesTotal> typeSortedNumber(List<WorkShoes> workShoesList, WorkShoesType workShoesType) {
         if (workShoesList.isEmpty()) return new ArrayList<>();
@@ -46,6 +53,10 @@ public class WorkShoesTotalServiceImpl implements WorkShoesTotalService {
         return workShoesTotals;
     }
 
+    /**
+     Этот метод находит рабочую обувь определенного размера, сортирует их по количеству и возвращает список WorkShoesTotal.
+     Использует методы sortedWorkShoesNotIssued и typeSortedNumber.
+     */
     @Override
     public List<WorkShoesTotal> findWorkShoesBySizeSortedNumber(Integer workShoesSize) {
         int number = 0;
@@ -73,6 +84,10 @@ public class WorkShoesTotalServiceImpl implements WorkShoesTotalService {
     }
 
 
+    /**
+     Данный метод находит всю рабочую обувь, сортирует их по количеству и возвращает список WorkShoesTotal.
+     Использует методы sortedWorkShoesNotIssued и sortedNumber.
+     */
     @Override
     public List<WorkShoesTotal> findAllWorkShoesSortedNumber() {
         List<WorkShoes> workShoesList = sortedWorkShoesNotIssued(workShoesRepository.findAll());

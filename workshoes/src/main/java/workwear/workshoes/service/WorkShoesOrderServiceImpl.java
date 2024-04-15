@@ -21,6 +21,11 @@ public class WorkShoesOrderServiceImpl implements WorkShoesOrderService {
     private final WorkShoesIssuedService workShoesIssuedService;
 
 
+    /**
+     метод возвращает список WorkShoesTotal объектов для определенного типа рабочей обуви, которую необходимо заменить.
+     Сначала он извлекает список рабочей обуви из WorkShoesIssuedService,
+     а затем сортирует и фильтрует их на основе заданного workShoesType.
+     */
     @Override
     public List<WorkShoesTotal> findWorShoesReplacedByType(WorkShoesType workShoesType) {
         List<WorkShoes> workShoesList = getWorkShoesFromShoesIssued().stream()
@@ -29,6 +34,10 @@ public class WorkShoesOrderServiceImpl implements WorkShoesOrderService {
         return workShoesTotalService.typeSortedNumber(workShoesList, workShoesType);
     }
 
+    /**
+     метод возвращает список WorkShoesTotal объектов для всех типов рабочей обуви, которые необходимо заменить.
+     Сначала он извлекает список рабочей обуви из WorkShoesIssuedService, а затем сортирует и фильтрует их.
+     */
     @Override
     public List<WorkShoesTotal> findWorkShoesAllReplaced() {
         return workShoesTotalService.sortedNumber(getWorkShoesFromShoesIssued()).stream()
@@ -36,6 +45,11 @@ public class WorkShoesOrderServiceImpl implements WorkShoesOrderService {
                 .toList();
     }
 
+    /**
+     метод возвращает список WorkShoesOrder объектов для определенного типа рабочей обуви, у которых отсутствуют размеры.
+     Сначала создается список всех возможных комбинаций размеров и типов,
+     а затем отфильтровываются те, которые существуют в базе данных.
+     */
     @Override
     public List<WorkShoesOrder> searchForMissingDimensionsByType(WorkShoesType workShoesType) {
         boolean is = true;
@@ -59,6 +73,11 @@ public class WorkShoesOrderServiceImpl implements WorkShoesOrderService {
         return workShoesOrderList;
     }
 
+    /**
+     метод возвращает список WorkShoesOrder объектов для всех типов рабочей обуви, у которых отсутствуют размеры.
+     Сначала создается список всех возможных комбинаций размеров и типов для всей рабочей обуви,
+     а затем отфильтровываются те, которые существуют в базе данных.
+     */
     @Override
     public List<WorkShoesOrder> searchForMissingDimensionsAll() {
         boolean is = true;
@@ -86,6 +105,10 @@ public class WorkShoesOrderServiceImpl implements WorkShoesOrderService {
         return workShoesOrderList;
     }
 
+    /**
+     метод, который извлекает список рабочей обуви из WorkShoesIssuedService, которую необходимо заменить.
+     Он сопоставляет идентификаторы выпущенной рабочей обуви с реальными WorkShoes объектами, используя WorkShoesService.
+     */
     private List<WorkShoes> getWorkShoesFromShoesIssued() {
         List<WorkShoesIssued> workShoesIssuedList = workShoesIssuedService.findWorkShoesToBeReplaced();
         return workShoesIssuedList.stream()

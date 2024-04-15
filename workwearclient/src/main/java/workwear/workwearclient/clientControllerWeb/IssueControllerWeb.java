@@ -41,11 +41,18 @@ public class IssueControllerWeb {
     private final WorkShoesController workShoesController;
     private final WorkShoesIssuedController workShoesIssuedController;
 
+    /**
+     Метод выполняет перенаправление на страницу "/issue".
+     */
     @GetMapping("/issue")
     public String issue(ModelAndView modelAndView) {
         return "redirect:/issue";
     }
 
+    /**
+     Метод отображает страницу выбора типа рабочей одежды для выдачи.
+     Передает список типов рабочей одежды и идентификатор сотрудника в модель.
+     */
     @GetMapping("/wear")
     public String issueWear(@RequestParam Long id, Model model) {
         List<String> workWearTypeList = WorkWearType.getValuesString();
@@ -54,6 +61,10 @@ public class IssueControllerWeb {
         return "issue_wear_type";
     }
 
+    /**
+     Метод отображает список доступной рабочей одежды определенного типа для выдачи.
+     Использует сервисы для получения и обработки данных.
+     */
     @GetMapping("/wear/type")
     public String issueListWear(@RequestParam Long id, @RequestParam String workWearType, Model model) {
         model.addAttribute("id", id);
@@ -65,6 +76,10 @@ public class IssueControllerWeb {
         return "issue_wear_list";
     }
 
+    /**
+     Метод отображает страницу для создания записи о выданной рабочей одежде.
+     Устанавливает и передает идентификаторы сотрудника и рабочей одежды.
+     */
     @GetMapping("/wear/{wearid}/{id}")
     public String issueWearFinal(WearIssuedView wearIssuedView, @PathVariable Long wearid, @PathVariable Long id, Model model) {
         wearIssuedView.setEmployeeId(id);
@@ -74,6 +89,11 @@ public class IssueControllerWeb {
         return "issued_create_wear";
     }
 
+    /**
+     Метод создает запись о выданной рабочей одежде.
+     Проверяет срок ношения и перенаправляет в случае ошибки.
+     Сохраняет данные и перенаправляет на страницу с выданной спецодеждой сотрудника.
+     */
     @PostMapping("/wear/create")
     public String issueWearCreate(WearIssuedView wearIssuedView) {
         if (wearIssuedView.getMonthPeriod() < 1) {
@@ -84,7 +104,10 @@ public class IssueControllerWeb {
         return "redirect:/employee/employee_issue/" + wearIssuedView.getEmployeeId();
     }
 
-
+    /**
+     Метод отображает страницу выбора типа рабочей обуви для выдачи.
+     Передает список типов рабочей обуви и идентификатор сотрудника в модель.
+     */
     @GetMapping("/shoes")
     public String issueShoes(@RequestParam Long id, Model model) {
         List<String> workShoesTypeList = WorkShoesType.getValuesString();
@@ -93,6 +116,10 @@ public class IssueControllerWeb {
         return "issue_shoes_type";
     }
 
+    /**
+     Метод отображает список доступной рабочей обуви определенного типа для выдачи.
+     Использует сервисы для получения и обработки данных.
+     */
     @GetMapping("/shoes/type")
     public String issueListShoes(@RequestParam Long id, @RequestParam String workShoesType, Model model) {
         model.addAttribute("id", id);
@@ -104,6 +131,10 @@ public class IssueControllerWeb {
         return "issue_shoes_list";
     }
 
+    /**
+     Метод отображает страницу для создания записи о выданной рабочей обуви.
+     Устанавливает и передает идентификаторы сотрудника и рабочей обуви.
+     */
     @GetMapping("/shoes/{shoesId}/{id}")
     public String issueShoesFinal(ShoesIssuedView shoesIssuedView, @PathVariable Long shoesId, @PathVariable Long id, Model model) {
         shoesIssuedView.setEmployeeId(id);
@@ -113,6 +144,11 @@ public class IssueControllerWeb {
         return "issued_create_shoes";
     }
 
+    /**
+     Метод создает запись о выданной рабочей обуви.
+     Проверяет срок ношения и перенаправляет в случае ошибки.
+     Сохраняет данные и перенаправляет на страницу с выданной спецодеждой сотрудника.
+     */
     @PostMapping("/shoes/create")
     public String issueShoesCreate(ShoesIssuedView shoesIssuedView) {
         if (shoesIssuedView.getMonthPeriod() < 1) {

@@ -33,6 +33,9 @@ public class EmployeeControllerWeb {
     private final EmployeeService employeeService;
     private final IssueControllerWeb issueControllerWeb;
 
+    /**
+     Метод, возвращающий страницу создания сотрудника. Добавляет в модель список производственных подразделений и компаний.
+     */
     @GetMapping("/create")
     public String populateList(Employee employee, Model model) {
         List<ProductionDivision> productionDivisions = ProductionDivision.getValues();
@@ -42,17 +45,26 @@ public class EmployeeControllerWeb {
         return "employee_create";
     }
 
+    /**
+     Метод, сохраняющий сотрудника в базе данных.
+     */
     @PostMapping("/create")
     public String saveEmployee(Employee employee) {
         employeeController.saveEmployee(employee);
         return "redirect:/employee/create";
     }
 
+    /**
+     Метод, возвращающий страницу поиска сотрудника
+     */
     @GetMapping("/search")
     public String searchEmployee() {
         return "employee_search";
     }
 
+    /**
+     Метод, возвращающий список всех сотрудников в виде EmployeeView
+     */
     @GetMapping("/search/all")
     public String allEmployee(Model model) {
         List<EmployeeView> employees = employeeService.createEmployeeView(employeeController.findAllEmployee());
@@ -61,6 +73,10 @@ public class EmployeeControllerWeb {
         return "employee_list";
     }
 
+    /**
+     Метод, возвращающий страницу обновления данных сотрудника.
+     Добавляет в модель список производственных подразделений и компаний.
+     */
     @GetMapping(value = "/employee_update/{id}")
     public String updateUserForm(Employee employee, Model model) {
         List<ProductionDivision> productionDivisions = ProductionDivision.getValues();
@@ -70,12 +86,19 @@ public class EmployeeControllerWeb {
         return "employee_update";
     }
 
+    /**
+     Метод, обновляющий данные сотрудника в базе данных.
+     */
     @PostMapping("/employee_update")
     public String updateUser(Employee employee) {// return logics add
         employeeController.saveEmployee(employee);
         return "redirect:/employee/search";
     }
 
+    /**
+     Метод, удаляющий сотрудника из базы данных, если у сотрудника нет выданной одежды или обуви.
+     В противном случае добавляет в модель сообщение об ошибке.
+     */
     @GetMapping("/employee_delete/{id}")
     public String deleteEmployee(@PathVariable Long id, Model model) {// return logics add
         if (workWearIssuedController.findWorkWearIssuedEmployee(id).isEmpty()
@@ -87,6 +110,9 @@ public class EmployeeControllerWeb {
         return "redirect:/employee/search";
     }
 
+    /**
+     Метод, возвращающий страницу списка выданной одежды и обуви конкретному сотруднику.
+     */
     @GetMapping("/employee_issue/{id}")
     public String employeeIssued(@PathVariable Long id, Model model) {
         List<WorkWearIssuedView> workWearIssuedViewList = workWearIssuedController.findWorkWearIssuedEmployee(id);
@@ -101,6 +127,10 @@ public class EmployeeControllerWeb {
         return "employee_issue";
     }
 
+    /**
+     Метод, возвращающий страницу поиска сотрудника по параметрам.
+     Добавляет в модель список производственных подразделений.
+     */
     @GetMapping("/search/param")
     public String searchParam(Model model) {
         List<String> productionDivisions = ProductionDivision.getValuesString();
@@ -108,6 +138,10 @@ public class EmployeeControllerWeb {
         return "employee_search_param";
     }
 
+    /**
+     Метод, ищущий сотрудников по фамилии.
+     Если фамилия не указана, перенаправляет на страницу поиска по параметрам.
+     */
     @GetMapping("/search/last_name")
     public String searchLastname(String lastName, Model model) {
         if (lastName == null || lastName.isEmpty()) return "redirect:/employee/search/param";
@@ -117,6 +151,9 @@ public class EmployeeControllerWeb {
         return "employee_list";
     }
 
+    /**
+     Метод, ищущий сотрудников по производственному подразделению.
+     */
     @GetMapping("/search/division")
     public String searchByDivision(String productionDivision, Model model) {
         ProductionDivision productionDivisionEnum = ProductionDivision.getType(productionDivision);
@@ -126,6 +163,9 @@ public class EmployeeControllerWeb {
         return "employee_list";
     }
 
+    /**
+     Метод, возвращающий выданную одежду в хранилище.
+     */
     @GetMapping("/return/{id}")
     public String returnStorageWear(@PathVariable Long id, Model model) {
         WorkWearIssued workWearIssued = workWearIssuedController.findWorkWearIssuedById(id);
@@ -133,6 +173,9 @@ public class EmployeeControllerWeb {
         return "redirect:/employee/employee_issue/" + workWearIssued.getEmployeeId();
     }
 
+    /**
+     Метод, возвращающий выданную обувь в хранилище.
+     */
     @GetMapping("/return_shoes/{id}")
     public String returnStorageShoes(@PathVariable Long id, Model model) {
         WorkShoesIssued workShoesIssued = workShoesIssuedController.findById(id);
@@ -140,6 +183,9 @@ public class EmployeeControllerWeb {
         return "redirect:/employee/employee_issue/" + workShoesIssued.getEmployeeId();
     }
 
+    /**
+     Метод, удаляющий выданную одежду из базы данных.
+     */
     @GetMapping("/delete/{id}")
     public String deleteEmployeeWear(@PathVariable Long id) {
         WorkWearIssued workWearIssued = workWearIssuedController.findWorkWearIssuedById(id);
@@ -147,6 +193,9 @@ public class EmployeeControllerWeb {
         return "redirect:/employee/employee_issue/" + workWearIssued.getEmployeeId();
     }
 
+    /**
+     Метод, удаляющий выданную обувь из базы данных.
+     */
     @GetMapping("/delete_shoes/{id}")
     public String deleteEmployeeShoes(@PathVariable Long id) {
         WorkShoesIssued workShoesIssued = workShoesIssuedController.findById(id);
@@ -154,6 +203,9 @@ public class EmployeeControllerWeb {
         return "redirect:/employee/employee_issue/" + workShoesIssued.getEmployeeId();
     }
 
+    /**
+     Метод, возвращающий страницу выдачи одежды и обуви сотруднику.
+     */
     @GetMapping("/issue/{id}")
     public ModelAndView issue(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("issue");

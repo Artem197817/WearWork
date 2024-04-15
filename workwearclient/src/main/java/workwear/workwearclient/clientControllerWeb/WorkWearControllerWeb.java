@@ -23,6 +23,10 @@ public class WorkWearControllerWeb {
     private final WorkWearController workWearController;
     private final WorkWearService workWearService;
 
+    /**
+     Метод отображает форму для создания новой рабочей одежды.
+     Добавляет в модель список типов, размеров и роста рабочей одежды.
+     */
     @GetMapping("/create")
     public String createWorkWear(WorkWearArrival workWearArrival, Model model) {
         List<String> workWearTypeList = WorkWearType.getValuesString();
@@ -34,6 +38,10 @@ public class WorkWearControllerWeb {
         return "workwear_create";
     }
 
+    /**
+     Метод сохраняет новую рабочую одежду.
+     Добавляет в модель список типов, размеров и роста рабочей одежды.
+     */
     @PostMapping("/create")
     public String saveWorkWear(WorkWearArrival workWearArrival, Model model) {
         String message = workWearController.saveWorkWear(workWearArrival);
@@ -47,11 +55,18 @@ public class WorkWearControllerWeb {
         return "workwear_create";
     }
 
+    /**
+     Метод отображает страницу поиска рабочей одежды.
+     */
     @GetMapping("/search")
     public String search() {
         return "workwear_search";
     }
 
+    /**
+     Метод отображает форму для поиска рабочей одежды по параметрам.
+     Добавляет в модель список типов, размеров и роста рабочей одежды.
+     */
     @GetMapping("/search/param")
     public String searchParam(Model model) {
         List<String> workWearTypeList = WorkWearType.getValuesString();
@@ -61,6 +76,9 @@ public class WorkWearControllerWeb {
         return "workwear_search_param";
     }
 
+    /**
+     Метод отображает список всей доступной рабочей одежды.
+     */
     @GetMapping("/search/all")
     public String searchAll(Model model) {
         model.addAttribute("status", "all");
@@ -70,6 +88,9 @@ public class WorkWearControllerWeb {
         return "workwear_list";
     }
 
+    /**
+     Метод отображает список рабочей одежды определенного типа.
+     */
     @GetMapping("/search/type")
     public String searchType(@RequestParam String workWearType, Model model) {
         WorkWearType workWearTyp = WorkWearType.getType(workWearType);
@@ -79,6 +100,9 @@ public class WorkWearControllerWeb {
         return "workwear_list";
     }
 
+    /**
+     Метод отображает список рабочей одежды определенного размера.
+     */
     @GetMapping("/search/size")
     public String searchSize(String workWearSize, Model model) {
         WorkWearSize wearSize = WorkWearSize.getType(workWearSize);
@@ -88,6 +112,10 @@ public class WorkWearControllerWeb {
         return "workwear_list";
     }
 
+    /**
+     Метод отображает форму для обновления рабочей одежды.
+     Добавляет в модель список типов, размеров и роста рабочей одежды.
+     */
     @GetMapping("/workwear_update/{id}")
     public String updateWorkWear(WorkWear workWear, Long id, Model model) {
         List<WorkWearType> workWearTypeList = WorkWearType.getValues();
@@ -99,6 +127,10 @@ public class WorkWearControllerWeb {
         return "workwear_update";
     }
 
+    /**
+     Метод обновляет существующую рабочую одежду.
+     Перенаправляет на страницу поиска рабочей одежды по типу.
+     */
     @PostMapping("/update")
     public String update(WorkWear workWear) {
         workWearController.saveWorkWear(workWear);
@@ -106,6 +138,10 @@ public class WorkWearControllerWeb {
         return "redirect:/workwear/search/type?workWearType=" + path;
     }
 
+    /**
+     Метод удаляет рабочую одежду по идентификатору.
+     Перенаправляет на страницу поиска рабочей одежды по типу.
+     */
     @GetMapping("/workwear_delete/{id}")
     public String deleteWorkWear(@PathVariable Long id) {
         String type = workWearController.findById(id).getWorkWearType().getValue();

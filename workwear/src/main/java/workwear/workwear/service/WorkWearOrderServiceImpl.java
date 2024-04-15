@@ -22,6 +22,9 @@ public class WorkWearOrderServiceImpl implements WorkWearOrderService{
     private final WorkWearTotalService workWearTotalService;
     private final WorkWearService workWearService;
 
+    /**
+     * Метод для поиска всей рабочей одежды подлежащей замене
+     */
     @Override
     public List<WorkWearTotal> findWorkWearAllReplaced(){
         return  workWearTotalService.sortedNumber(getWorkWearFromWearIssued()).stream()
@@ -29,6 +32,9 @@ public class WorkWearOrderServiceImpl implements WorkWearOrderService{
                 .toList();
     }
 
+    /**
+     * Получение списка выданной рабочей одежды, подлежащей замене
+     */
     private List<WorkWear> getWorkWearFromWearIssued(){
         List<WorkWearIssued> workWearIssuedList = workWearIssuedService.findWorkWearIssuedToBeReplaced();
         return workWearIssuedList.stream()
@@ -36,6 +42,11 @@ public class WorkWearOrderServiceImpl implements WorkWearOrderService{
                 .toList();
     }
 
+    /**
+     * Метод для поиска рабочей одежды определенного типа, подлежащей замене
+     * @param workWearType тип рабочей одежды
+     * @return список замененных рабочих одежд данного типа
+     */
     @Override
     public List<WorkWearTotal> findWorkWearReplacedByType(WorkWearType workWearType){
         List<WorkWear> workWearList = getWorkWearFromWearIssued().stream()
@@ -44,6 +55,10 @@ public class WorkWearOrderServiceImpl implements WorkWearOrderService{
         return workWearTotalService.typeSortedNumber(workWearList,workWearType);
     }
 
+    /**
+     * Метод для поиска всех отсутствующих размеров рабочей одежды
+     * @return список заказов на отсутствующие размеры рабочей одежды
+     */
     @Override
     public List<WorkWearOrder> searchForMissingDimensionsAll() {
         boolean is = true;
@@ -77,6 +92,11 @@ public class WorkWearOrderServiceImpl implements WorkWearOrderService{
         return  workWearOrderList;
     }
 
+    /**
+     * Метод для поиска отсутствующих размеров рабочей одежды определенного типа
+     * @param workWearType тип рабочей одежды
+     * @return список заказов на отсутствующие размеры рабочей одежды данного типа
+     */
     @Override
     public  List<WorkWearOrder> searchForMissingDimensionsByType(WorkWearType workWearType){
         boolean is = true;
@@ -105,5 +125,4 @@ public class WorkWearOrderServiceImpl implements WorkWearOrderService{
         }
         return  workWearOrderList;
     }
-
 }

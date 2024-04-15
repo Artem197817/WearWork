@@ -20,11 +20,18 @@ public class WorkShoesIssuedServiceImpl implements WorkShoesIssuedService {
     private final WorkShoesIssuedRepository workShoesIssuedRepository;
     private final WorkShoesService workShoesService;
 
+    /**
+     метод возвращает список всех записей о выдаче рабочей обуви.
+     */
     @Override
     public List<WorkShoesIssued> findAllWorkShoesIssued() {
         return workShoesIssuedRepository.findAll();
     }
 
+    /**
+     Метод сохраняет новую запись о выдаче рабочей обуви.
+     Сначала он обновляет статус соответствующей рабочей обуви на "выдано", а затем сохраняет запись о выдаче рабочей обуви.
+     */
     @Override
     @Transactional
     public String saveWorkShoesIssued(WorkShoesIssued workShoesIssued) {
@@ -35,18 +42,27 @@ public class WorkShoesIssuedServiceImpl implements WorkShoesIssuedService {
         return "WorkShoesIssued save";
     }
 
+    /**
+     метод возвращает запись о выдаче рабочей обуви по ее идентификатору.
+     */
     @Override
     public WorkShoesIssued findById(Long id) {
         Optional<WorkShoesIssued> workShoesIssued = workShoesIssuedRepository.findById(id);
         return workShoesIssued.orElse(null);
     }
 
+    /**
+     метод обновляет запись о выдаче рабочей обуви.
+     */
     @Override
     @Transactional
     public WorkShoesIssued updateWorkShoesIssued(WorkShoesIssued workShoesIssued) {
         return workShoesIssuedRepository.save(workShoesIssued);
     }
 
+    /**
+     метод удаляет запись о выдаче рабочей обуви и соответствующую запись о рабочей обуви.
+     */
     @Override
     @Transactional
     public void deleteWorkShoesIssued(Long id) {
@@ -54,11 +70,17 @@ public class WorkShoesIssuedServiceImpl implements WorkShoesIssuedService {
         workShoesIssuedRepository.deleteById(id);
     }
 
+    /**
+     метод возвращает список записей о выдаче рабочей обуви для конкретного сотрудника.
+     */
     @Override
     public List<WorkShoesIssued> findWorkShoesIssuedByEmployeeId(Long id) {
         return workShoesIssuedRepository.findWorkShoesIssuedByEmployeeId(id);
     }
 
+    /**
+     метод возвращает список записей о выдаче рабочей обуви, которые необходимо заменить в ближайшее время.
+     */
     @Override
     public List<WorkShoesIssued> findWorkShoesToBeReplaced() {
         LocalDate localDateControl = LocalDate.now().plusMonths(1);
@@ -67,11 +89,18 @@ public class WorkShoesIssuedServiceImpl implements WorkShoesIssuedService {
                 .toList();
     }
 
+    /**
+     метод возвращает запись о выдаче рабочей обуви по идентификатору рабочей обуви.
+     */
     @Override
     public WorkShoesIssued findWorkShoesIssuedByWorkShoesId(Long id) {
         return workShoesIssuedRepository.findWorkShoesIssuedByWorkShoesId(id);
     }
 
+    /**
+     метод возвращает список записей о выдаче рабочей обуви
+     и соответствующую информацию о рабочей обуви для конкретного сотрудника.
+     */
     @Override
     public List<WorkShoesIssuedView> findWorkShoesIssuedEmployee(Long id) {
         List<WorkShoesIssued> workShoesIssuedList = findWorkShoesIssuedByEmployeeId(id);
@@ -83,6 +112,9 @@ public class WorkShoesIssuedServiceImpl implements WorkShoesIssuedService {
         return workShoesIssuedViewList;
     }
 
+    /**
+     метод возвращает рабочую обувь в хранилище и удаляет соответствующую запись о выдаче рабочей обуви.
+     */
     @Override
     @Transactional
     public String returnWorkShoesOnStorage(@PathVariable Long workShoesIssuedId) {
@@ -94,5 +126,4 @@ public class WorkShoesIssuedServiceImpl implements WorkShoesIssuedService {
         return workShoes.getWorkShoesType().getValue() + " размер "
                 + workShoes.getWorkShoesSize() + " возвращен на склад";
     }
-
 }

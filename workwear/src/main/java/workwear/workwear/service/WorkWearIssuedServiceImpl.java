@@ -20,17 +20,26 @@ public class WorkWearIssuedServiceImpl implements WorkWearIssuedService {
     private final WorkWearIssuedRepository workWearIssuedRepository;
     private final WorkWearService workWearService;
 
+    /**
+     метод, который возвращает список всех выданных рабочих костюмов.
+     */
     @Override
     public List<WorkWearIssued> findAllWorkWearIssued() {
         return workWearIssuedRepository.findAll();
     }
 
+    /**
+     метод, который возвращает выданную рабочую одежду по указанному идентификатору.
+     */
     @Override
     public WorkWearIssued findWorkWearIssuedById(Long id) {
         Optional<WorkWearIssued> workWearIssued = workWearIssuedRepository.findById(id);
         return workWearIssued.orElse(null);
     }
 
+    /**
+     метод, который сохраняет выданную рабочую одежду в базе данных.
+     */
     @Override
     @Transactional
     public String saveWorkWearIssued(WorkWearIssued workWearIssued) {
@@ -41,6 +50,9 @@ public class WorkWearIssuedServiceImpl implements WorkWearIssuedService {
         return "WorkWearIssued save";
     }
 
+    /**
+     метод, который обновляет информацию  о выданной рабочей одежде в базе данных.
+     */
     @Override
     @Transactional
     public String updateWorkWearIssued(WorkWearIssued workWearIssued) {
@@ -48,6 +60,9 @@ public class WorkWearIssuedServiceImpl implements WorkWearIssuedService {
         return "WorkWearIssued update";
     }
 
+    /**
+     метод, который удаляет выданную рабочую одежду из базы данных по указанному идентификатору.
+     */
     @Override
     @Transactional
     public void deleteWorkWearIssuedById(Long id) {
@@ -59,11 +74,20 @@ public class WorkWearIssuedServiceImpl implements WorkWearIssuedService {
         }
     }
 
+    /**
+     * Метод для поиска всей выданной рабочей одежды по идентификатору сотрудника
+     * @param id идентификатор сотрудника
+     * @return список выданной рабочей одежды
+     */
     @Override
     public List<WorkWearIssued> findWorkWearIssuedByEmployeeId(Long id) {
         return workWearIssuedRepository.findWorkWearIssuedByEmployeeId(id);
     }
 
+    /**
+     * Метод для поиска всей выданной рабочей одежды, которую необходимо заменить
+     * @return список выданной рабочей одежды, которую необходимо заменить
+     */
     @Override
     public List<WorkWearIssued> findWorkWearIssuedToBeReplaced() {
         LocalDate localDateControl = LocalDate.now().plusMonths(1);
@@ -72,6 +96,11 @@ public class WorkWearIssuedServiceImpl implements WorkWearIssuedService {
                 .toList();
     }
 
+    /**
+     * Метод для поиска всей выданной рабочей одежды и связанных с ней объектов WorkWear для сотрудника по идентификатору
+     * @param id идентификатор сотрудника
+     * @return список выданных рабочих одежд и связанных с ними объектов WorkWear
+     */
     @Override
     public List<WorkWearIssuedView> findWorkWearIssuedEmployee(Long id) {
         List<WorkWearIssued> workWearIssuedList = findWorkWearIssuedByEmployeeId(id);
@@ -83,11 +112,21 @@ public class WorkWearIssuedServiceImpl implements WorkWearIssuedService {
         return workWearIssuedViewList;
     }
 
+    /**
+     * Метод для поиска выданной рабочей одежды по идентификатору рабочей одежды
+     * @param id идентификатор рабочей одежды
+     * @return объект выданной рабочей одежды
+     */
     @Override
     public WorkWearIssued findWorkWearIssuedByWorkWearId(Long id) {
         return workWearIssuedRepository.findWorkWearIssuedByWorkWearId(id);
     }
 
+    /**
+     * Метод для возврата рабочей одежды на склад
+     * @param id идентификатор выданной рабочей одежды
+     * @return сообщение о возврате рабочей одежды на склад
+     */
     @Override
     @Transactional
     public String returnWorkWearOnStorage(@PathVariable Long id){

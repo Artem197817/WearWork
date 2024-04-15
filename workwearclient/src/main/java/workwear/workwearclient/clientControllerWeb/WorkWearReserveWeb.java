@@ -1,5 +1,7 @@
 package workwear.workwearclient.clientControllerWeb;
 
+import io.micrometer.core.instrument.Metrics;
+import io.micrometer.core.instrument.Timer;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import workwear.workwearclient.service.WorkShoesService;
 import workwear.workwearclient.service.WorkWearReserveService;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 @Controller
@@ -29,23 +32,12 @@ public class WorkWearReserveWeb {
     private final WorkWearReserveService workWearReserveService;
     private final WorkShoesService workShoesService;
 
-    @GetMapping
-    public String reserve() {
-        return "reserve";
-    }
-
-    @GetMapping("/workwear")
-    public String reserveWear() {
-        return "reserve_wear";
-    }
-
-    @GetMapping("/workshoes")
-    public String reserveShoes() {
-        return "reserve_shoes";
-    }
+    private final Timer timer = Metrics.timer("reserve_wear_method");
+    private final Timer timer1 = Metrics.timer("reserve_shoes_all");
 
     @GetMapping("/workwear/all")
     public String reserveWearAll(Model model) {
+        timer.record(60, TimeUnit.MILLISECONDS);
         List<WorkWearTotalView> workWearTotalViewList = workWearReserveService.createWorWearTotalView(workWearTotalController
                 .findAllWorkWearSortedNumber());
         model.addAttribute("workWearTotalViewList", workWearTotalViewList);
@@ -54,6 +46,7 @@ public class WorkWearReserveWeb {
 
     @GetMapping("/workshoes/all")
     public String reserveShoesAll(Model model) {
+        timer1.record(60, TimeUnit.MILLISECONDS);
         List<WorkShoesTotalView> workShoesTotalViewList = workWearReserveService.createWorkShoesTotalView((workShoesTotalController
                 .findAllWorkShoesSortedNumber()));
         model.addAttribute("workShoesTotalViewList", workShoesTotalViewList);
@@ -111,5 +104,19 @@ public class WorkWearReserveWeb {
         List<Integer> workShoesSizeList = workShoesService.createSizeList();
         model.addAttribute("workShoesSizeList", workShoesSizeList);
         return "reserve_shoes_param";
+    }
+    @GetMapping
+    public String reserve() {
+        return "reserve";
+    }
+
+    @GetMapping("/workwear")
+    public String reserveWear() {
+        return "reserve_wear";
+    }
+
+    @GetMapping("/workshoes")
+    public String reserveShoes() {
+        return "reserve_shoes";
     }
 }
